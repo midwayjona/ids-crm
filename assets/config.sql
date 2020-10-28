@@ -74,7 +74,7 @@ VALUES(
   'Galileo',
   'demo',
   '$2y$10$NvhAfolog8y7/yPNyp4OaOF7NAT3J6U8491iLFVaN2huYpJXG5QrW',
-  FALSE
+  DEFAULT
 );
 
 INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
