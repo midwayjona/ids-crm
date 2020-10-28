@@ -2,17 +2,18 @@
 
 class Database {
     // DB Parameters
-    private $host = 'localhost';
-    private $db_name = 'ids_crm';
-    private $username = 'ids_crm_su';
-    private $password = 'crmpass';
+    private $host = 'ec2-3-218-75-21.compute-1.amazonaws.com';
+    private $db_name = 'dcqgflp27ndde1';
+    private $username = 'vgnfbeovpvnijf';
+    private $password = '620fc3b1d71d1c9ecef8408db8b411f8099f59bd0388991635a1d9b009423b8d';
+    private $port = '5432';
     private $dbDSN;
     private $conn;
     
     // DB connection
     public function connect() {
         $this->conn = null;
-        $this->dbDSN = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
+        $this->dbDSN = 'pgsql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->db_name;
         
         try {
             $this->conn = new PDO($this->dbDSN, $this->username, $this->password);
