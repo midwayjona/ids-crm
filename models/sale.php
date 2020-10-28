@@ -29,8 +29,8 @@ class Sale {
     // create a new costumer
     public function create() {
         // query
-        $query = 'INSERT INTO sale (store_id, poit_of_sales_id, invoice_id, nit, externally_created, total, total_discount, total_sale, sstatus, created_at, created_by, updated_at, updated_by)
-                    VALUES (:store_id, :poit_of_sales_id, :invoice_id, :nit, :externally_created, :total, :total_discount, :total_sale, :sstatus, :created_at, :created_by, :updated_at, :updated_by)';
+        $query = 'INSERT INTO sale (store_id, poit_of_sales_id, invoice_id, nit, externally_created, total, total_discount, total_sale, sstatus, is_delivery, created_at, created_by, updated_at, updated_by)
+                    VALUES (:store_id, :poit_of_sales_id, :invoice_id, :nit, :externally_created, :total, :total_discount, :total_sale, :sstatus, :is_delivery, :created_at, :created_by, :updated_at, :updated_by)';
         
         // prep stmt
         $stmt = $this->conn->prepare($query);
@@ -45,6 +45,7 @@ class Sale {
         $this->total_discount = htmlspecialchars(strip_tags($this->total_discount));
         $this->total_sale = htmlspecialchars(strip_tags($this->total_sale));
         $this->sstatus = htmlspecialchars(strip_tags($this->sstatus));
+        $this->is_delivery = htmlspecialchars(strip_tags($this->is_delivery));
         $this->created_at = htmlspecialchars(strip_tags($this->created_at));
         $this->created_by = htmlspecialchars(strip_tags($this->created_by));
         $this->updated_at = htmlspecialchars(strip_tags($this->updated_at));
@@ -60,6 +61,7 @@ class Sale {
         $stmt->bindParam(':total_discount', $this->total_discount);
         $stmt->bindParam(':total_sale', $this->total_sale);
         $stmt->bindParam(':sstatus', $this->sstatus);
+        $stmt->bindParam(':is_delivery', $this->is_delivery);
         $stmt->bindParam(':created_at', $this->created_at);
         $stmt->bindParam(':created_by', $this->created_by);
         $stmt->bindParam(':updated_at', $this->updated_at);
