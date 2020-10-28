@@ -70,9 +70,9 @@ class Costumer {
                 ccompany,
                 cstatus
             FROM
-                costumer
+                '.$this->table.'
             LEFT JOIN cstatus
-                ON costumer.nit = costumer.nit
+                ON costumer.nit = cstatus.nit
             WHERE
                 costumer.nit = :nit OR costumer.dpi = :dpi
                 ';
@@ -102,8 +102,8 @@ class Costumer {
     // create a new costumer
     public function create() {
         // query
-        $query = 'INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
-                    VALUES (:nit, :dpi, :cname, :cdob, :cphone, :caddress, :cemail, :ccompany, :cuser, :cpassword, DEFAULT)';
+        $query = 'INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword)
+                    VALUES (:nit, :dpi, :cname, :cdob, :cphone, :caddress, :cemail, :ccompany, :cuser, :cpassword)';
         
         // prep stmt
         $stmt = $this->conn->prepare($query);
@@ -133,10 +133,13 @@ class Costumer {
         $stmt->bindParam(':cpassword', $this->cpassword);
 
         if ($stmt->execute()) {
-            # code...cdob)';
+            // add new entry on cstatus table for the new costumer
+            $sql = 'INSERT INTO cstatus (nit) VALUES (:nit)';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['nit' => $this->nit]);
+            // costumer created success
             return true;
         }
-        // print error
         return false;
     }
 
