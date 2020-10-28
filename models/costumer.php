@@ -153,9 +153,7 @@ class Costumer {
                     cphone = :cphone,
                     caddress = :caddress,
                     cemail = :cemail,
-                    ccompany = :ccompany,
-                    cuser = :cuser,
-                    cpassword = :cpassword
+                    ccompany = :ccompany
                 WHERE
                     nit = :nit OR dpi = :dpi';
         
@@ -171,8 +169,6 @@ class Costumer {
         $this->caddress = htmlspecialchars(strip_tags($this->caddress));
         $this->cemail = htmlspecialchars(strip_tags($this->cemail));
         $this->ccompany = htmlspecialchars(strip_tags($this->ccompany));
-        $this->cuser = htmlspecialchars(strip_tags($this->cuser));
-        $this->cpassword = htmlspecialchars(strip_tags($this->cpassword));
 
         // bind data
         $stmt->bindParam(':nit', $this->nit);
@@ -183,8 +179,6 @@ class Costumer {
         $stmt->bindParam(':caddress', $this->caddress);
         $stmt->bindParam(':cemail', $this->cemail);
         $stmt->bindParam(':ccompany', $this->ccompany);
-        $stmt->bindParam(':cuser', $this->cuser);
-        $stmt->bindParam(':cpassword', $this->cpassword);
 
         if ($stmt->execute()) {
             # code...

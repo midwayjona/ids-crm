@@ -24,12 +24,12 @@ $data = json_decode(file_get_contents("php://input"));
 $costumer->nit = $data->nit;
 $costumer->dpi = $data->dpi;
 $costumer->cname = $data->cname;
+$costumer->cdob = $data->cdob;
 $costumer->cphone = $data->cphone;
 $costumer->caddress = $data->caddress;
 $costumer->cemail = $data->cemail;
 $costumer->ccompany = $data->ccompany;
-$costumer->cuser = $data->cuser;
-$costumer->cpassword = $data->cpassword;
+
 
 $sql = 'SELECT * FROM costumer WHERE nit = :nit OR dpi = :dpi';
 $stmt = $db->prepare($sql);

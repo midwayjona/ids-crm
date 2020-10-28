@@ -17,7 +17,6 @@ $db = $database->connect();
 // Instantiate Costumers object
 $costumer = new Costumer($db);
 
-
 // get data
 $data = json_decode(file_get_contents("php://input"));
 
@@ -29,8 +28,16 @@ $costumer->cphone = $data->cphone;
 $costumer->caddress = $data->caddress;
 $costumer->cemail = $data->cemail;
 $costumer->ccompany = $data->ccompany;
-$costumer->cuser = $data->cuser;
-$costumer->cpassword = $data->cpassword;
+
+// generate user and password
+$costumer->cuser = $data->nit;
+$costumer->cpassword = date("Ym", strtotime($data->cdob));
+
+echo $costumer->cpassword;
+echo $costumer->cuser;
+
+// $costumer->cuser = $data->cuser;
+// $costumer->cpassword = $data->cpassword;
 
 // costumer verification
 $sql = 'SELECT * FROM costumer WHERE nit = :nit OR dpi = :dpi';
@@ -48,13 +55,13 @@ if ($num > 0) {
 
 
 // create costumer
-if ($costumer->create()) {
-    # code...
-    echo json_encode(
-        array('message' => 'Costumer created')
-    );
-} else {
-    echo json_encode(
-        array('message' => 'Costumer not created')
-    );
-}
+// if ($costumer->create()) {
+//     # code...
+//     echo json_encode(
+//         array('message' => 'Costumer created')
+//     );
+// } else {
+//     echo json_encode(
+//         array('message' => 'Costumer not created')
+//     );
+// }
