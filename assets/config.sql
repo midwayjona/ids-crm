@@ -40,7 +40,7 @@ CREATE TABLE cstatus
 
 CREATE TABLE sale
 (
-  sale_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  sale_id SERIAL PRIMARY KEY,
   store_id int NOT NULL,
   poit_of_sales_id int NOT NULL,
   invoice_id int NOT NULL,

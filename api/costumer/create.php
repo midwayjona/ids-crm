@@ -33,8 +33,7 @@ $costumer->ccompany = $data->ccompany;
 $costumer->cuser = $data->nit;
 $costumer->cpassword = date("Ym", strtotime($data->cdob));
 
-echo $costumer->cpassword;
-echo $costumer->cuser;
+
 
 // $costumer->cuser = $data->cuser;
 // $costumer->cpassword = $data->cpassword;
@@ -55,13 +54,13 @@ if ($num > 0) {
 
 
 // create costumer
-// if ($costumer->create()) {
-//     # code...
-//     echo json_encode(
-//         array('message' => 'Costumer created')
-//     );
-// } else {
-//     echo json_encode(
-//         array('message' => 'Costumer not created')
-//     );
-// }
+if ($costumer->create()) {
+    # code...
+    echo json_encode(
+        array('message' => 'Costumer created')
+    );
+} else {
+    echo json_encode(
+        array('message' => 'Costumer not created')
+    );
+}

@@ -21,8 +21,15 @@ $costumer = new Costumer($db);
 // get data
 $data = json_decode(file_get_contents("php://input"));
 
-$costumer->nit = $data->nit;
-$costumer->dpi = $data->dpi;
+if (!(isset($_GET['nit']) OR isset($_GET['dpi']))) {
+    # code...
+    die();
+} else {
+    $costumer->nit = isset($_GET['nit']) ? $_GET['nit'] : $costumer->nit = 0;
+    $costumer->dpi = isset($_GET['dpi']) ? $_GET['dpi'] : $costumer->dpi = 0;
+}
+
+
 $costumer->cname = $data->cname;
 $costumer->cdob = $data->cdob;
 $costumer->cphone = $data->cphone;
@@ -33,7 +40,7 @@ $costumer->ccompany = $data->ccompany;
 
 $sql = 'SELECT * FROM costumer WHERE nit = :nit OR dpi = :dpi';
 $stmt = $db->prepare($sql);
-$stmt->execute(['nit' => $data->nit, 'dpi' => $data->dpi]);
+$stmt->execute(['nit' => $costumer->nit, 'dpi' => $costumer->dpi]);
 $num = $stmt->rowCount();
 
 if ($num == 0) {
@@ -49,7 +56,8 @@ if ($num == 0) {
 if ($costumer->update()) {
     # code...
     echo json_encode(
-        array('message' => 'Costumer updated')
+        array('message' => 'Costumer updated',
+                'nit' => $costumer->nit)
     );
 } else {
     echo json_encode(
