@@ -8,16 +8,7 @@ include_once '../../config/database.php';
 include_once '../../models/costumer.php';
 
 // Instantiate DB and connect
-$database = new Database();
-$db = $database->connect();
 
-// Instantiate Costumers object
-$costumers = new Costumer($db);
-
-// Costumers query
-$result = $costumers->read();
-// RowCout for verfication
-$num = $result->rowCount();
 
 // check if entrys
 if ($num > 0) {

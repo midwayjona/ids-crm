@@ -6,14 +6,14 @@ class Database {
     private $db_name = 'dcqgflp27ndde1';
     private $username = 'vgnfbeovpvnijf';
     private $password = '620fc3b1d71d1c9ecef8408db8b411f8099f59bd0388991635a1d9b009423b8d';
-    private $port = '5432';
+    private $db_port = '5432';
     private $dbDSN;
     private $conn;
     
     // DB connection
     public function connect() {
         $this->conn = null;
-        $this->dbDSN = 'pgsql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->db_name;
+        $this->dbDSN = 'pgsql:host=' . $this->host . ';port=' . $this->db_port . ';dbname=' . $this->db_name;
         
         try {
             $this->conn = new PDO($this->dbDSN, $this->username, $this->password);
