@@ -1,13 +1,13 @@
 <?php
 
-$dbHost = 'localhost';
+$dbHost = 'ec2-3-218-75-21.compute-1.amazonaws.com';
 //local
-$dbName = 'ids_crm';
-$dbUser = 'ids_crm_su';
-$dbPassword = 'crmpass';
+$dbName = 'dcqgflp27ndde1';
+$dbUser = 'vgnfbeovpvnijf';
+$dbPassword = '620fc3b1d71d1c9ecef8408db8b411f8099f59bd0388991635a1d9b009423b8d';
 
 // Set DSN (datasource name)
-$dbDSN = 'mysql:host='.$dbHost.';dbname='.$dbName;
+$dbDSN = 'psql:host='.$dbHost.';dbname='.$dbName;
 
 // PDO Instance
 try {

@@ -14,6 +14,7 @@ CREATE TABLE costumer
   nit varchar ( 255 ) PRIMARY KEY NOT NULL,
   dpi varchar ( 255 ) NOT NULL,
   cname varchar ( 255 ),
+  cdob DATE NOT NULL,
   cphone varchar ( 255 ),
   caddress varchar ( 255 ),
   cemail varchar ( 255 ),
@@ -27,8 +28,7 @@ CREATE TABLE costumer
 
 CREATE TABLE cstatus
 (
-  suid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  nit varchar ( 255 ) NOT NULL,
+  nit varchar ( 255 ) PRIMARY KEY NOT NULL,
   cstatus int NOT NULL DEFAULT 0,
   pqd int NOT NULL DEFAULT 0,
   pqs int NOT NULL DEFAULT 0,
@@ -62,11 +62,12 @@ CREATE TABLE sale
 );
 
 
-INSERT INTO costumer (nit, dpi, cname, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
+INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
 VALUES(
   '12345678',
   '1234567891234',
   'Joseph Joestar',
+  '1995-08-05',
   '12345678',
   'Seattle, WA 96478',
   'joseph@mail.com',
@@ -76,11 +77,12 @@ VALUES(
   FALSE
 );
 
-INSERT INTO costumer (nit, dpi, cname, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
+INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
 VALUES(
   '87654321',
   '7894561231234',
   'Robert Speedwagon',
+  '1995-08-05',
   '98654795',
   'Seattle, WA 96478',
   'admin@crm.com',
