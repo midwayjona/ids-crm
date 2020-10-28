@@ -43,4 +43,4 @@ $costumer_arr = array(
 );
 
 // json output
-print_r(json_encode($costumer_arr));
+print_r(json_encode($costumer_arr), JSON_PRETTY_PRINT);
