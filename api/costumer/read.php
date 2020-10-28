@@ -8,7 +8,16 @@ include_once '../../config/database.php';
 include_once '../../models/costumer.php';
 
 // Instantiate DB and connect
+$database = new Database();
+$db = $database->connect();
 
+// Instantiate Costumers object
+$costumers = new Costumer($db);
+
+// Costumers query
+$result = $costumers->read();
+// RowCout for verfication
+$num = $result->rowCount();
 
 // check if entrys
 if ($num > 0) {
@@ -22,6 +31,7 @@ if ($num > 0) {
             'nit' => $nit,
             'dpi' => $dpi,
             'cname' => $cname,
+            'cdob' => $cdob,
             'cphone' => $cphone,
             'caddress' => $caddress,
             'cemail' => $cemail,

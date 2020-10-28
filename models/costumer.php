@@ -31,6 +31,7 @@ class Costumer {
                 c.nit,
                 c.dpi,
                 c.cname,
+                c.cdob,
                 c.cphone,
                 c.caddress,
                 c.cemail,
@@ -42,7 +43,7 @@ class Costumer {
             LEFT JOIN
                 cstatus s ON c.nit = s.nit
             WHERE
-                cadmin = FALSE
+                cadmin = false
             ORDER BY
                 c.cname ASC';
         // Prep stmt
@@ -64,6 +65,7 @@ class Costumer {
                 c.nit,
                 c.dpi,
                 c.cname,
+                c.dob,
                 c.cphone,
                 c.caddress,
                 c.cemail,
