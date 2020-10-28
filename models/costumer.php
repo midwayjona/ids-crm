@@ -36,9 +36,7 @@ class Costumer {
                 c.cphone,
                 c.caddress,
                 c.cemail,
-                c.ccompany,
-                c.cuser,
-                c.cpassword
+                c.ccompany
             FROM
                 ' . $this->table . ' c
             LEFT JOIN
@@ -70,8 +68,6 @@ class Costumer {
                 caddress,
                 cemail,
                 ccompany,
-                cuser,
-                cpassword,
                 cstatus
             FROM
                 costumer
@@ -136,12 +132,6 @@ class Costumer {
         $stmt->bindParam(':cuser', $this->cuser);
         $stmt->bindParam(':cpassword', $this->cpassword);
 
-        if ($stmt->execute()) {
-            # code...cdob)';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['nit' => $this->nit]);
-            return true;
-        }
         // print error
         return false;
     }

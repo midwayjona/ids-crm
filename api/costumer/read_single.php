@@ -37,9 +37,7 @@ $costumer_arr = array(
     'caddress' => $costumer->caddress,
     'cemail' => $costumer->cemail,
     'ccompany' => $costumer->ccompany,
-    'cstatus' => $costumer->cstatus,
-    'cuser' => $costumer->cuser,
-    'cpassword' => $costumer->cpassword
+    'cstatus' => $costumer->cstatus
 );
 
 // json output

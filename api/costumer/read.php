@@ -36,17 +36,14 @@ if ($num > 0) {
             'caddress' => $caddress,
             'cemail' => $cemail,
             'ccompany' => $ccompany,
-            'cstatus' => $cstatus,
-            'cuser' => $cuser,
-            'cpassword' => $cpassword
-
+            'cstatus' => $cstatus
         );
 
         // Push to 'data'
         array_push($costumers_arr['data'], $costumer_item);
     }
     // convert to json
-    echo json_encode($costumers_arr);
+    echo json_encode($costumers_arr, JSON_PRETTY_PRINT);
 
 } else {
     // no entries
