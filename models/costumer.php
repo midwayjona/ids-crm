@@ -9,6 +9,7 @@ class Costumer {
     public $nit;
     public $dpi;
     public $cname;
+    public $cdob;
     public $cphone;
     public $caddress;
     public $cemail;
@@ -73,7 +74,7 @@ class Costumer {
                 c.cuser,
                 c.cpassword
             FROM
-                ' . $this->table . ' c
+                costumer c
             LEFT JOIN
                 cstatus s ON c.nit = s.nit
             WHERE
@@ -89,6 +90,7 @@ class Costumer {
         $this->nit = $row->nit;
         $this->dpi = $row->dpi;
         $this->cname = $row->cname;
+        $this->cdob = $row->cdob;
         $this->cphone = $row->cphone;
         $this->caddress = $row->caddress;
         $this->cemail = $row->cemail;
@@ -131,9 +133,7 @@ class Costumer {
         $stmt->bindParam(':cpassword', $this->cpassword);
 
         if ($stmt->execute()) {
-            # code...
-            $sql = 'INSERT INTO cstatus (nit)
-                    VALUES (:nit)';
+            # code...cdob)';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['nit' => $this->nit]);
             return true;

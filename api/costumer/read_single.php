@@ -17,7 +17,6 @@ $costumer = new Costumer($db);
 
 // Costumers query
 
-
 if (!(isset($_GET['nit']) OR isset($_GET['dpi']))) {
     # code...
     die();
