@@ -132,6 +132,10 @@ class Costumer {
         $stmt->bindParam(':cuser', $this->cuser);
         $stmt->bindParam(':cpassword', $this->cpassword);
 
+        if ($stmt->execute()) {
+            # code...cdob)';
+            return true;
+        }
         // print error
         return false;
     }
