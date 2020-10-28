@@ -65,7 +65,7 @@ class Costumer {
                 c.nit,
                 c.dpi,
                 c.cname,
-                c.dob,
+                c.cdob,
                 c.cphone,
                 c.caddress,
                 c.cemail,
@@ -100,8 +100,8 @@ class Costumer {
     // create a new costumer
     public function create() {
         // query
-        $query = 'INSERT INTO costumer (nit, dpi, cname, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
-                    VALUES (:nit, :dpi, :cname, :cphone, :caddress, :cemail, :ccompany, :cuser, :cpassword, DEFAULT)';
+        $query = 'INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
+                    VALUES (:nit, :dpi, :cname, :cdob, :cphone, :caddress, :cemail, :ccompany, :cuser, :cpassword, DEFAULT)';
         
         // prep stmt
         $stmt = $this->conn->prepare($query);
@@ -110,6 +110,7 @@ class Costumer {
         $this->nit = htmlspecialchars(strip_tags($this->nit));
         $this->dpi = htmlspecialchars(strip_tags($this->dpi));
         $this->cname = htmlspecialchars(strip_tags($this->cname));
+        $this->cdob = htmlspecialchars(strip_tags($this->cdob));
         $this->cphone = htmlspecialchars(strip_tags($this->cphone));
         $this->caddress = htmlspecialchars(strip_tags($this->caddress));
         $this->cemail = htmlspecialchars(strip_tags($this->cemail));
@@ -121,6 +122,7 @@ class Costumer {
         $stmt->bindParam(':nit', $this->nit);
         $stmt->bindParam(':dpi', $this->dpi);
         $stmt->bindParam(':cname', $this->cname);
+        $stmt->bindParam(':cdob', $this->cdob);
         $stmt->bindParam(':cphone', $this->cphone);
         $stmt->bindParam(':caddress', $this->caddress);
         $stmt->bindParam(':cemail', $this->cemail);
@@ -146,6 +148,7 @@ class Costumer {
         $query = 'UPDATE ' . $this->table . ' 
                 SET 
                     cname = :cname,
+                    cdob = :cdob,
                     cphone = :cphone,
                     caddress = :caddress,
                     cemail = :cemail,
@@ -162,6 +165,7 @@ class Costumer {
         $this->nit = htmlspecialchars(strip_tags($this->nit));
         $this->dpi = htmlspecialchars(strip_tags($this->dpi));
         $this->cname = htmlspecialchars(strip_tags($this->cname));
+        $this->cdob = htmlspecialchars(strip_tags($this->cdob));
         $this->cphone = htmlspecialchars(strip_tags($this->cphone));
         $this->caddress = htmlspecialchars(strip_tags($this->caddress));
         $this->cemail = htmlspecialchars(strip_tags($this->cemail));
@@ -173,6 +177,7 @@ class Costumer {
         $stmt->bindParam(':nit', $this->nit);
         $stmt->bindParam(':dpi', $this->dpi);
         $stmt->bindParam(':cname', $this->cname);
+        $stmt->bindParam(':cdob', $this->cdob);
         $stmt->bindParam(':cphone', $this->cphone);
         $stmt->bindParam(':caddress', $this->caddress);
         $stmt->bindParam(':cemail', $this->cemail);
