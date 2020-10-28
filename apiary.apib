@@ -127,27 +127,22 @@ You can request an update to a costumer using the nit or dpi, costumer should ex
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+        {
+            "store_id": "101",
+            "poit_of_sales_id": "56465486",
+            "invoice_id": "006598",
+            "nit": "12345678",
+            "externally_created": "false",
+            "total": "2500",
+            "total_discount": "300",
+            "total_sale": "2200",
+            "sstatus": "PROCESSING",
+            "is_delivery": "false",
+            "created_at": "2020-10-28 00:00:00",
+            "created_by": "Cashier",
+            "updated_at": "2020-10-28 00:00:00",
+            "updated_by": "Cashier"
+        }
 
 ### Update a Sale [PUT]
 
