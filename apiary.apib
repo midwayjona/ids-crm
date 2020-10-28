@@ -121,11 +121,13 @@ You can request an update to a costumer using the nit or dpi, costumer should ex
 
 
 
-## Sale [/sale]
+## Sale [/sale/create.php]
 
 ### Create a New Sale [POST]
 
-+ Response 200 (application/json)
+POS can replicate their invoice records on our database.
+
++ Request 200 (application/json)
 
         {
             "store_id": "101",
@@ -143,6 +145,13 @@ You can request an update to a costumer using the nit or dpi, costumer should ex
             "updated_at": "2020-10-28 00:00:00",
             "updated_by": "Cashier"
         }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Sale saved"
+        }
+
 
 ### Update a Sale [PUT]
 
