@@ -62,29 +62,32 @@ class Costumer {
         // Query
         $query = '
             SELECT
-                s.cstatus as cstatus,
-                c.nit,
-                c.dpi,
-                c.cname,
-                c.cdob,
-                c.cphone,
-                c.caddress,
-                c.cemail,
-                c.ccompany,
-                c.cuser,
-                c.cpassword
+                costumer.nit,
+                dpi,
+                cname,
+                cdob,
+                cphone,
+                caddress,
+                cemail,
+                ccompany,
+                cuser,
+                cpassword,
+                cstatus
             FROM
-                costumer c
-            LEFT JOIN
-                cstatus s ON c.nit = s.nit
+                costumer
+            LEFT JOIN cstatus
+                ON costumer.nit = costumer.nit
             WHERE
-                c.nit = :nit OR c.dpi = :dpi
-            LIMIT 0,1
+                costumer.nit = :nit OR costumer.dpi = :dpi
                 ';
 
         // Prep stmt
         $stmt = $this->conn->prepare($query);
-        $stmt->execute(['nit' => $this->nit, 'dpi' => $this->dpi]);
+
+        $stmt->bindParam(':nit', $this->nit);
+        $stmt->bindParam(':dpi', $this->dpi);
+
+        $stmt->execute();
         $row = $stmt->fetchObject();
 
         $this->nit = $row->nit;
@@ -95,6 +98,7 @@ class Costumer {
         $this->caddress = $row->caddress;
         $this->cemail = $row->cemail;
         $this->ccompany = $row->ccompany;
+        $this->cstatus = $row->cstatus;
         $this->cuser = $row->cuser;
         $this->cpassword = $row->cpassword;
     }
