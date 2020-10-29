@@ -1,0 +1,200 @@
+FORMAT: 1A
+HOST: https://ids-crm.herokuapp.com/api
+
+# CRM
+
+CRM services listed below.
+
+## Costumers [/costumer/read.php]
+
+### List All Costumers [GET]
+
+List all the current costumers on the CRM records.
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "nit": "12345678",
+                    "dpi": "1234567891234",
+                    "cname": "Joseph Joestar",
+                    "cdob": "1995-08-05",
+                    "cphone": "12345678",
+                    "caddress": "Seattle, WA 96478",
+                    "cemail": "joseph@mail.com",
+                    "ccompany": "Galileo",
+                    "cstatus": 0
+                },
+                {
+                    "nit": "12345677",
+                    "dpi": "9587456321569",
+                    "cname": "Kujo Jotaro",
+                    "cdob": "1980-01-01",
+                    "cphone": "66687788",
+                    "caddress": "Los Angeles, CA 90178",
+                    "cemail": "joseph@mail.com",
+                    "ccompany": "Statehard",
+                    "cstatus": 0
+                }
+            ]
+        }
+        
+## Costumer [/costumer/read_single.php]
+
+### Single Costumer Information [GET]
+
+Request a single costumer information using nit or dpi, costumer should exist.
+
++ Parameters
+    + nit (varchar, `12345678`) ... Costumer NIT
+    + dpi (varchar, `1234567891234`) ... Costumer DPI
+
++ Response 200 (application/json)
+
+        {
+            "nit": "12345678",
+            "dpi": "1234567891234",
+            "cname": "Joseph Joestar",
+            "cphone": "12345678",
+            "caddress": "Seattle, WA 96478",
+            "cemail": "joseph@mail.com",
+            "ccompany": "Galileo",
+            "cstatus": 0
+        }
+        
+        
+## Add Costumer [/costumer/create.php]
+
+### Create a New Costumer [POST]
+
+Adds a new costumer entry on the CRM records.
+
++ Request 200 (application/json)
+
+        {
+            "nit": "12345677",
+            "dpi": "9587456321569",
+            "cname": "Kujo Jotaro",
+            "cdob": "1980-01-01",
+            "cphone": "66687788",
+            "caddress": "Los Angeles, CA 90178",
+            "cemail": "joseph@mail.com",
+            "ccompany": "Statehard"
+        }
+
+
++ Response 200 (application/json)
+
+        [
+            {
+                "message": "Costumer created"
+            }
+        ]
+
+## Edit Costumer [/costumer/update.php]
+### Update a Costumer [PUT]
+
+You can request an update to a costumer using the nit or dpi, costumer should exist on record.
+
++ Parameters
+    + nit (varchar, `12345678`) ... Costumer NIT
+    + dpi (varchar, `1234567891234`) ... Costumer DPI
+
++ Request 200 (application/json)
+
+        {
+            "cname": "Kujo Jotaro",
+            "cdob": "1980-01-01",
+            "cphone": "66687788",
+            "caddress": "Chicago, IL 90178",
+            "cemail": "joseph@mail.com",
+            "ccompany": "Intel"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Costumer updated",
+            "nit": "12345678"
+        }
+
+
+
+## Add Sale [/sale/create.php]
+
+### Create a New Sale [POST]
+
+POS can replicate their invoice records on our database.
+
++ Request 200 (application/json)
+
+        {
+            "store_id": "101",
+            "poit_of_sales_id": "56465486",
+            "invoice_id": "006598",
+            "nit": "12345678",
+            "externally_created": "false",
+            "total": "2500",
+            "total_discount": "300",
+            "total_sale": "2200",
+            "sstatus": "PROCESSING",
+            "is_delivery": "false",
+            "created_at": "2020-10-28 00:00:00",
+            "created_by": "Cashier",
+            "updated_at": "2020-10-28 00:00:00",
+            "updated_by": "Cashier"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Sale saved"
+        }
+
+
+## Edit Sale [/sale/update.php]
+
+### Update a Sale [PUT]
+
+POS will use this service to replicate costumer invoice in CRM records.
+
++ Request (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
