@@ -4,8 +4,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type,
-Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: *');
 
 include_once '../../config/database.php';
 include_once '../../models/costumer.php';
@@ -17,9 +16,6 @@ $db = $database->connect();
 // Instantiate Costumers object
 $costumer = new Costumer($db);
 
-
-// $jwt = (json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $jwt)[1])))));
-// echo $jwt->username;
 
 // get data
 $data = json_decode(file_get_contents("php://input"));

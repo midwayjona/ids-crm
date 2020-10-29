@@ -59,7 +59,8 @@ echo "Decode:\n" . print_r($decoded_array, true) . "\n";
 
 
 
-
+// $jwt = (json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $jwt)[1])))));
+// echo $jwt->username;
 
 
 // check if entrys
