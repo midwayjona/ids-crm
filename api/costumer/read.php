@@ -46,15 +46,15 @@ ehde/zUxo6UvS7UrBQIDAQAB
 EOD;
 
 
-$decoded = JWT::decode($jwt, $publicKey, array('RS256'));
-print_r($decoded);
-/*
- NOTE: This will now be an object instead of an associative array. To get
- an associative array, you will need to cast it as such:
-*/
+// $decoded = JWT::decode($jwt, $publicKey, array('RS256'));
+// print_r($decoded);
+// /*
+//  NOTE: This will now be an object instead of an associative array. To get
+//  an associative array, you will need to cast it as such:
+// */
 
-$decoded_array = (array) $decoded;
-echo "Decode:\n" . print_r($decoded_array, true) . "\n";
+// $decoded_array = (array) $decoded;
+// echo "Decode:\n" . print_r($decoded_array, true) . "\n";
 
 
 
