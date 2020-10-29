@@ -17,6 +17,10 @@ $db = $database->connect();
 // Instantiate Costumers object
 $costumer = new Costumer($db);
 
+
+// $jwt = (json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $jwt)[1])))));
+// echo $jwt->username;
+
 // get data
 $data = json_decode(file_get_contents("php://input"));
 

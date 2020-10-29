@@ -1,4 +1,5 @@
 <?php
+require '../../vendor/autoload.php';
 
 // Headers
 header('Access-Control-Allow-Origin: *');
@@ -6,6 +7,13 @@ header('Content-Type: application/json');
 
 include_once '../../config/database.php';
 include_once '../../models/costumer.php';
+
+// decode JWT
+include_once '../../vendor/firebase/php-jwt/src/BeforeValidException.php';
+include_once '../../vendor/firebase/php-jwt/src/ExpiredException.php';
+include_once '../../vendor/firebase/php-jwt/src/SignatureInvalidException.php';
+include_once '../../vendor/firebase/php-jwt/src/JWT.php';
+use \Firebase\JWT\JWT;
 
 // Instantiate DB and connect
 $database = new Database();
@@ -18,6 +26,41 @@ $costumers = new Costumer($db);
 $result = $costumers->read();
 // RowCout for verfication
 $num = $result->rowCount();
+
+
+
+
+
+
+// JWT Token DECODE
+$header = apache_request_headers(); 
+$jwt = $header['Authorization'];
+
+$publicKey = <<<EOD
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8kGa1pSjbSYZVebtTRBLxBz5H
+4i2p/llLCrEeQhta5kaQu/RnvuER4W8oDH3+3iuIYW4VQAzyqFpwuzjkDI+17t5t
+0tyazyZ8JXw+KgXTxldMPEL95+qVhgXvwtihXC1c5oGbRlEDvDF6Sa53rcFVsYJ4
+ehde/zUxo6UvS7UrBQIDAQAB
+-----END PUBLIC KEY-----
+EOD;
+
+
+$decoded = JWT::decode($jwt, $publicKey, array('RS256'));
+print_r($decoded);
+/*
+ NOTE: This will now be an object instead of an associative array. To get
+ an associative array, you will need to cast it as such:
+*/
+
+$decoded_array = (array) $decoded;
+echo "Decode:\n" . print_r($decoded_array, true) . "\n";
+
+
+
+
+
+
 
 // check if entrys
 if ($num > 0) {

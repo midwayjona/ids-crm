@@ -67,6 +67,7 @@ class Sale {
         $stmt->bindParam(':updated_at', $this->updated_at);
         $stmt->bindParam(':updated_by', $this->updated_by);
 
+
         if ($stmt->execute()) {
             // sale created successfully
             return true;

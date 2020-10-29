@@ -29,11 +29,11 @@ $sale->total = $data->total;
 $sale->total_discount = $data->total_discount;
 $sale->total_sale = $data->total_sale;
 $sale->sstatus = $data->sstatus;
+$sale->is_delivery = $data->is_delivery;
 $sale->created_at = $data->created_at;
 $sale->created_by = $data->created_by;
 $sale->updated_at = $data->updated_at;
 $sale->updated_by = $data->updated_by;
-
 
 
 // if ($num > 0) {
@@ -46,7 +46,7 @@ $sale->updated_by = $data->updated_by;
 
 
 // create costumer
-if ($costumer->create()) {
+if ($sale->create()) {
     # code...
     echo json_encode(
         array('message' => 'Sale saved')
