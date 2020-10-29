@@ -557,24 +557,51 @@ if ($_SESSION['cadmin'] == FALSE) {
             <h2>Costumers</h2>
             <hr>
             <div class="table-responsive">
-              <table class="table table-hover">
+              
+            
+            <form class="form-inline my-2 my-lg-0">
+              
+            <div class="form-label-group">
+              <input type="text" id="myInput" class="form-control mr-sm-2" onkeyup="myFunction()" placeholder="Search by name">
+            </div>
+            
+            <div class="form-label-group">
+            <input type="text" id="myInput" class="form-control mr-sm-2" onkeyup="myFunction()" placeholder="Search by NIT">
+            </div>
+          
+          </form>
+
+
+        <div class="mb-4"></div> <!-- spacer -->
+
+
+
+
+
+
+
+
+              <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">TIN</th>
+                    <th scope="col">DPI</th>
+                    <th scope="col">NIT</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">Birthday</th>
-                    <th scope="col">Address</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <?php
-                  $sql = 'SELECT cid, ctin, cname, cuser, cemail, cphone, cdob, caddress FROM costumer WHERE cadmin=FALSE';
+                  $sql = 'SELECT * 
+                          FROM costumer
+                          LEFT JOIN cstatus
+                            ON costumer.nit = cstatus.nit
+                          WHERE cadmin=FALSE
+                          ORDER BY cname ASC';
                   $stmt = $conn->prepare($sql);
                   $stmt->execute();
                   $row = $stmt->fetchAll();
@@ -582,14 +609,37 @@ if ($_SESSION['cadmin'] == FALSE) {
                   foreach ($row as $row) {
                     echo '
                       <tr>
-                        <td scope="row"><b>'.$row->cid.'</b></td>
-                        <td>'.$row->ctin.'</td>
+                        <td scope="row"><b>'.$row->dpi.'</b></td>
+                        <td>'.$row->nit.'</td>
                         <td>'.$row->cname.'</td>
-                        <td>'.$row->cuser.'</td>
+                        <td class="align-top">';
+                        switch ($row->cstatus) {
+                          case 0:
+                              echo '<p style="color:#b08D57"><b>Bronze</b></p>';
+                              break;
+                          case 1:
+                              echo '<p style="color:#555652"><b>Silver</b></p>';
+                              break;
+                          case 2:
+                              echo '<p style="color:#DAA520"><b>Gold</b></p>';
+                              break;
+                          case 3:
+                              echo '<p style="color:#aaa9ae"><b>Platinum</b></p>';
+                              break;
+                          case 4:
+                              echo '
+                              <p style="color:#70d1f4"><b>
+                                <svg class="svg-icon" viewBox="0 0 20 20" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path fill="none" d="M10,0.542c-5.224,0-9.458,4.234-9.458,9.458c0,5.223,4.235,9.459,9.458,9.459c5.224,0,9.458-4.236,9.458-9.459C19.459,4.776,15.225,0.542,10,0.542 M8.923,18.523C4.685,17.992,1.402,14.383,1.402,10c0-4.383,3.283-7.993,7.521-8.524C6.919,3.749,5.701,6.731,5.701,10C5.701,13.27,6.919,16.25,8.923,18.523"></path>
+                                </svg>
+                                Diamond
+                              </b></p>';
+                              break;
+                            }
+                        
+                        echo '</td>
                         <td>'.$row->cemail.'</td>
                         <td>'.$row->cphone.'</td>
-                        <td>'.$row->cdob.'</td>
-                        <td>'.$row->caddress.'</td>
                         <td>
                           <form >
                             <button class="btn" type="submit" name="delete-costumer-submit" title="Delete">
@@ -689,7 +739,29 @@ if ($_SESSION['cadmin'] == FALSE) {
       </main>
     </div>
   </div>
+  <script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
 
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
   <script>
 
 
