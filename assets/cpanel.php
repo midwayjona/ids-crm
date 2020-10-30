@@ -72,22 +72,17 @@ $('#table_id').DataTable();
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               Customer
             </a> -->
-
-
           </li>
+
+
           <li class="nav-item">
 
-            <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+            <a class="nav-link" id="v-pills-tickets-tab" data-toggle="pill" href="#v-pills-tickets" role="tab" aria-controls="v-pills-tickets" aria-selected="false">
               <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                <path d="M17.728,4.419H2.273c-0.236,0-0.429,0.193-0.429,0.429v10.304c0,0.234,0.193,0.428,0.429,0.428h15.455c0.235,0,0.429-0.193,0.429-0.428V4.849C18.156,4.613,17.963,4.419,17.728,4.419 M17.298,14.721H2.702V9.57h14.596V14.721zM17.298,8.712H2.702V7.424h14.596V8.712z M17.298,6.566H2.702V5.278h14.596V6.566z M9.142,13.005c0,0.235-0.193,0.43-0.43,0.43H4.419c-0.236,0-0.429-0.194-0.429-0.43c0-0.236,0.193-0.429,0.429-0.429h4.292C8.948,12.576,9.142,12.769,9.142,13.005"></path>
+                <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
               </svg>
-              Create Card
-            </a> -->
-
-            <!-- <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-              Card
-            </a> -->
+              Tickets
+            </a>
 
           </li>
 
@@ -342,7 +337,7 @@ $('#table_id').DataTable();
           <!-- CREATE USER TAB -->
           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 
-
+          
             <div class="col-lg-12 col-md-8">
               <form class="form-signin"  action="<?php echo $path ?>includes/cpanel_signup.inc.php" method="post">
 
@@ -351,23 +346,28 @@ $('#table_id').DataTable();
                     <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
                   </svg>
                   <h1 class="h3 mb-3 font-weight-normal">Enroll a new Costumer</h1>
-                  <h6>Easily manage your bank accounts and finances <b>online</b>.</h6>
+                  <h6>Get closer to you clients, and let them manage all their information <b>online</b>.</h6>
                 </div>
                 <div class="mb-5"></div>
 
                 <div class="form-label-group mb-3">
-                  <label for="input_ctid">Taxpayer Identification Number</label>
-                  <input type="text" name="ctin" id="input_ctid" class="form-control tin"  required="" autofocus="">
+                  <label for="input_nit">Taxpayer Identification Number</label>
+                  <input type="text" name="nit" id="input_nit" class="form-control tin"  required="" autofocus="">
                 </div>
                 
                 <div class="form-label-group mb-3">
                   <label for="input_cid">Identification Number</label>
-                  <input type="text" name="cid" id="input_cid" class="form-control userid"  required="" autofocus="">
+                  <input type="text" name="dpi" id="input_cid" class="form-control userid"  required="" autofocus="">
                 </div>
 
                 <div class="form-label-group mb-3">
                   <label for="input_cname">Name</label>
                   <input type="text" name="cname" id="input_cname" class="form-control"  required="" autofocus="">
+                </div>
+
+                <div class="form-label-group mb-3">
+                  <label for="input_ccompany">Company</label>
+                  <input type="text" name="ccompany" id="input_ccompany" class="form-control"  required="" autofocus="">
                 </div>
 
                 <div class="form-label-group mb-3">
@@ -381,34 +381,15 @@ $('#table_id').DataTable();
                 </div>
 
                 <div class="form-label-group mb-3">
-                  <label for="input_caddress">Address</label>
-                  <input type="text" name="caddress" id="input_caddress" class="form-control" required="">
-                </div>
-
-                <div class="form-label-group mb-3">
                   <label for="input_cemail">Email</label>
                   <input type="text" name="cemail" id="input_cemail" class="form-control" autofocus="">
                 </div>
 
-                <div class="my-5">
-                  <span><b>Online Credentials</b></span>
-                </div>
-
-
                 <div class="form-label-group mb-3">
-                  <label for="inputUsername">Username</label>
-                  <input type="text" name="cuser" id="inputUsername" class="form-control">
+                  <label for="input_caddress">Address</label>
+                  <textarea class="form-control" name="caddress" id =input_caddress" rows="4" required></textarea>
                 </div>
 
-                <div class="form-label-group mb-3">
-                  <label for="cpwd">Password</label>
-                  <input type="password" name="cpwd" id="cpwd" class="form-control" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.cpwd_vrfy.pattern = this.value;">
-                </div>
-
-                <div class="form-label-group mb-3">
-                  <label for="cpwd_vrfy">Password Verification</label>
-                  <input type="password" name="cpwd" id="cpwd_vrfy" class="form-control" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');">
-                </div>
                 <div class="mb-4"></div>
                 <button type="reset" class="btn btn-md btn-light">Clear</button>
 
@@ -566,10 +547,109 @@ $('#table_id').DataTable();
             </div>
           </div>
 
+          <!-- TICKETS TAB -->
+
+          
+          <div class="tab-pane fade" id="v-pills-tickets" role="tabpanel" aria-labelledby="v-pills-tickets-tab">
+          <div class="mb-5"></div> <!-- spacer -->  
+          <h2>Tickets</h2>
+          <div class="table-responsive">
+            <form class="form-inline my-2 my-lg-0">
+              <div class="form-label-group">
+                <input type="text" id="myInput" class="form-control mr-sm-2" placeholder="Search">
+              </div>
+            </form>
+            <div class="mb-4"></div> <!-- spacer -->
+            
+            
+            <table class="table table-hover" id="myTicketTable">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Status</th>
+                  <th scope="col">Ticket Number</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">NIT</th>
+                  <th scope="col"></th>
+                  <th scope="col">Title</th>
+                  <th scope="col"></th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  $sql = 'SELECT * 
+                          FROM ticket 
+                          LEFT JOIN costumer
+                            ON ticket.nit = costumer.nit
+                          WHERE cadmin=FALSE
+                          ORDER BY tstatus ASC, created ASC';
+                  $stmt = $conn->prepare($sql);
+                  $stmt->execute();
+                  $row = $stmt->fetchAll();
+                  // display all tickets
+                  foreach ($row as $row) {
+                    $orgDate = $row->created;
+                    $newDate = date("F jS h:ia", strtotime($orgDate));
+                    echo '
+                      <tr>
+                        <td scope="row"><b>';
+                          switch ($row->tstatus) {
+                            case 0:
+                                echo '<p style="color:#088da5" title="We’ve received your message and your ticket is waiting to be responded to by an agent."><b>open</b></p>';
+                                break;
+                            case 1:
+                                echo '<p style="color:#b30000" title="Ticket has been closed."><b>closed</b></p>';
+                                break;
+                            case 2:
+                                echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b>resolved</b></p>';
+                                break;
+                          }
+                          echo '</b>
+                        </td>
+                        <td scope="row">
+                            <form class="form-ticket-submit"  action="ticket.php" method="post">
+                              <input type="hidden" name="tid" value="'.$row->tid.'" id="tid" class="form-control">
+                              <button class="btn" type="submit" name="submit-ticket" title="Ticket Number">
+                                <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                                </svg>
+                                <b>'.sprintf("%010s", $row->tid).'</b>
+                              </button>
+                            </form>
+                        </td>
+                        <td>'.$row->cname.'</td>
+                        <td class="align-top">'.$row->nit.'</td>
+                        <td></td>
+                        <td>'.$row->msg.'</td>
+                        <td></td>
+                        <td>'.$newDate.'</td>
+
+                      </tr>
+
+
+
+                    ';
+
+                  }
+                   ?>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <!-- END TICKETS TAB -->
+
+
+
+
+
 
 
           <!-- COSTUMERS TAB -->
           <div class="tab-pane fade" id="v-pills-costumers" role="tabpanel" aria-labelledby="v-pills-costumers-tab">
+          <div class="mb-5"></div> <!-- spacer -->  
             <h2>Costumers</h2>
             <hr>
             <div class="table-responsive">
@@ -580,8 +660,7 @@ $('#table_id').DataTable();
             <div class="form-label-group">
               <input type="text" id="myInput" class="form-control mr-sm-2" placeholder="Search">
             </div>
-          
-          </form>
+            </form>
 
 
           
@@ -589,13 +668,6 @@ $('#table_id').DataTable();
 
           
         <div class="mb-4"></div> <!-- spacer -->
-
-
-
-
-
-
-
 
               <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
@@ -755,7 +827,25 @@ $('#table_id').DataTable();
 
 
 
+  <script>
+function filterTable(event) {
+    var filter = event.target.value.toUpperCase();
+    var rows = document.querySelector("#myTicketTable tbody").rows;
+    
+    for (var i = 0; i < rows.length; i++) {
+        var firstCol = rows[i].cells[1].textContent.toUpperCase();
+        var secondCol = rows[i].cells[2].textContent.toUpperCase();
+        var thirdCol = rows[i].cells[3].textContent.toUpperCase();
+        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }      
+    }
+}
 
+document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
+</script>
 
 
   

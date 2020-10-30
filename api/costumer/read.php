@@ -38,16 +38,14 @@ $jwt = $header['Authorization'];
 
 $publicKey = <<<EOD
 -----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8kGa1pSjbSYZVebtTRBLxBz5H
-4i2p/llLCrEeQhta5kaQu/RnvuER4W8oDH3+3iuIYW4VQAzyqFpwuzjkDI+17t5t
-0tyazyZ8JXw+KgXTxldMPEL95+qVhgXvwtihXC1c5oGbRlEDvDF6Sa53rcFVsYJ4
-ehde/zUxo6UvS7UrBQIDAQAB
+MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKrRu+P1qGOjtQXW5lLLKkvrQlO/SVa3
+W8P1RPrY1CQ//nNVcIEePX6bEiZtsvMKHgtwZ7d57cK8niUsPvQe8B0CAwEAAQ==
 -----END PUBLIC KEY-----
 EOD;
 
 
-// $decoded = JWT::decode($jwt, $publicKey, array('RS256'));
-// print_r($decoded);
+$decoded = JWT::decode($jwt, $publicKey, array('RS256'));
+print_r($decoded);
 // /*
 //  NOTE: This will now be an object instead of an associative array. To get
 //  an associative array, you will need to cast it as such:

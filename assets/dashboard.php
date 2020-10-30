@@ -221,13 +221,13 @@ include $path.'header.php';
               </button>
             </div>
             ';
-            } elseif ($status == 'PAY_SUCCESS') {
+            } elseif ($status == 'S101') {
                 // code...
                 echo '
             <div class="alert alert-success alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              <h4 class="alert-heading">Thank you for your payment!</h4>
+              <h4 class="alert-heading">Ticket submitted!</h4>
               <hr>
-              ✔️ payment stored.
+              ✔️ agent will get back to you soon.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -255,15 +255,13 @@ include $path.'header.php';
                       <ul id="a">
                         <li>
                           <a href="">
-                            <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" class="bd-placeholder-img rounded-circle" width="160" height="160">
+                            <img src="<?php echo $path ?>assets/media/avatar.png" class="bd-placeholder-img rounded-circle" width="160" height="160">
                             <!-- Wrapped into div -->
                             <div class="details">
                               <h3><strong><?php echo $_SESSION['cname']; ?></strong></h3>
                               <h5><?php echo $_SESSION['ccompany']; ?></h5>
                               <div class="mb-3"></div> <!-- spacer -->
-                              <h6><span style="font-size: .75rem;text-transform: uppercase;">ID </span><b><?php echo $_SESSION['dpi']; ?></b></h6>
                               <h6><span style="font-size: .75rem;text-transform: uppercase;">TIN </span><b><?php echo $_SESSION['nit']; ?></b></h6>
-                              <h6><span style="font-size: .75rem;text-transform: uppercase;">USERNAME </span><b><?php echo $_SESSION['cuser']; ?></b></h6>
                               <h6><span style="font-size: .75rem;text-transform: uppercase;">EMAIL </span><b><?php echo $_SESSION['cemail']; ?></b></h6>
                               <h6><span style="font-size: .75rem;text-transform: uppercase;">PHONE </span><b><?php echo $_SESSION['cphone']; ?></b></h6>
                             </div>
@@ -276,7 +274,42 @@ include $path.'header.php';
                     <!-- Progress Bar -->
                     <div class="container">
 
-                    <h3><strong>Regular Member</strong></h3>
+                    <h3><strong>
+                      <?php
+                      // FETCH CURRENT STATUS
+                      $sql = 'SELECT * FROM cstatus WHERE nit = :nit';
+                      $stmt = $conn->prepare($sql);
+                      $stmt->execute(['nit' => $_SESSION['nit']]);
+                      $result = $stmt->fetchObject();
+                      
+                      $pqd = $result->pqd;
+                      $pqs = $result->pqs;
+                      $cstatus = $result->cstatus;
+
+                      switch ($cstatus) {
+                        case 0:
+                            echo '<p style="color:#b08D57;display:inline-block;"><b>Bronze</b></p>';
+                            break;
+                        case 1:
+                            echo '<p style="color:#555652;display:inline-block;"><b>Silver</b></p>';
+                            break;
+                        case 2:
+                            echo '<p style="color:#DAA520;display:inline-block;"><b>Gold</b></p>';
+                            break;
+                        case 3:
+                            echo '<p style="color:#aaa9ae;display:inline-block;"><b>Platinum</b></p>';
+                            break;
+                        case 4:
+                            echo '
+                            <p style="color:#70d1f4"><b>
+                              Diamond
+                            </b></p>';
+                            break;
+                          }
+                      ?>
+                    
+                    
+                    Member</strong></h3>
                     <h5>Progress to reach next tier</h5>
                       <div class="row">
                       
@@ -292,7 +325,7 @@ include $path.'header.php';
 
                         <div class="col-sm">
                         <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart2" width="2330" height="983" style="display: block; height: 787px; width: 1864px;"></canvas>
-                        <h5>Premier Qualifying Sales (<b><a href=" " title="You earn premier qualifying dollars for every sale under you account.">PQS</a></b>)</h5>
+                        <h5>Premier Qualifying Sales (<b><a href=" " title="You earn premier qualifying sales for every sale under you account.">PQS</a></b>)</h5>
                         </div>
                         </div>
 
@@ -401,9 +434,9 @@ include $path.'header.php';
             <!-- TICKET BUTTON -->
             <div class="mb-5"></div> <!-- spacer -->
             <div class="col-lg-12 col-md-6">
-              <form class="form"  action="<?php echo $path ?>includes/cpanel_signup.inc.php" method="post">
+              <form class="form"  action="create_ticket.php" method="post">
                 <div class="mb-4"></div>
-                <button class="btn btn-outline-dark" type="submit" name="cpanel-signup-submit">Create Ticket</button>
+                <button class="btn btn-outline-dark" type="submit" name="create-ticket-submit">Create Ticket</button>
               </form>
             </div>
             <div class="mb-5"></div> <!-- spacer -->
@@ -427,7 +460,7 @@ include $path.'header.php';
                     <?php
 
                     $nit = $_SESSION['nit'];
-                    $sql = 'SELECT * FROM ticket WHERE nit = :nit ORDER BY created DESC';
+                    $sql = 'SELECT * FROM ticket WHERE nit = :nit ORDER BY tstatus ASC, created DESC';
                     $stmt = $conn->prepare($sql);
                     $stmt->execute(['nit' => $nit]);
   
@@ -533,84 +566,89 @@ include $path.'header.php';
       </main>
     </div>
   </div>
-
-
-
+  
+  <!-- GET PROGRAM STATUS FOR COSTUMER -->
+  <?php
+  // MAX VALUES TO REACH NEXT TIER
+  $pqd_max = 100000;
+  $pqs_max = 50;
+  ?>
+  
   <script>
-    Chart.defaults.global.legend.display = false;
-    var ctxi = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctxi, {
-  // The type of chart we want to create
-  type: 'doughnut',
-  data: {
-    datasets: [{
-      data: [
-        <?php echo '3525' ?>, // current PQD
-        <?php echo '96475' ?>, // to reach next tier PQD - 100000
-      ],
-      backgroundColor: [
-        window.chartColors.blue,
-        window.chartColors.gray,
-      ],
-      label: 'Dataset 1'
-    }],
-    labels: [
-      '<?php echo ' current '.$cBalance ?>',
-      '<?php echo ' left '.$cAvail ?>'
-    ]
-  },
-  options: {
-    responsive: true,
-    legend: {
-      position: 'left',
+  Chart.defaults.global.legend.display = false;
+  var ctxi = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctxi, {
+    // The type of chart we want to create
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [
+          <?php echo $pqd; ?>, // current PQD
+          <?php echo $pqd_max-$pqd; ?>, // to reach next tier PQD - 100000
+        ],
+        backgroundColor: [
+          window.chartColors.blue,
+          window.chartColors.gray,
+        ],
+        label: 'Dataset 1'
+      }],
+      labels: [
+        '<?php echo ' current '.$cBalance ?>',
+        '<?php echo ' left '.$cAvail ?>'
+      ]
     },
-    title: {
-      display: false,
-      text: 'Current Statement'
-    },
-    animation: {
-      duration: 3000,
-      animateScale: false,
-      animateRotate: true
+    options: {
+      responsive: true,
+      legend: {
+        position: 'left',
+      },
+      title: {
+        display: false,
+        text: 'Current Statement'
+      },
+      animation: {
+        duration: 3000,
+        animateScale: false,
+        animateRotate: true
+      }
     }
-  }
-});
-
-var ctxi = document.getElementById('myChart2').getContext('2d');
-var chart = new Chart(ctxi, {
-  // The type of chart we want to create
-  type: 'doughnut',
-  data: {
-    datasets: [{
-      data: [
-        <?php echo '2' ?>,
-        <?php echo '48' ?>,
-      ],
-      backgroundColor: [
-        window.chartColors.green,
-        window.chartColors.gray,
-      ],
-      label: 'Dataset 1'
-    }],
-    labels: [
-      '<?php echo ' current '.$cBalance ?>',
-      '<?php echo ' left '.$cAvail ?>'
-    ]
-  },
-  options: {
-    responsive: true,
-    legend: {
-      position: 'left',
+  });
+  
+  var ctxi = document.getElementById('myChart2').getContext('2d');
+  var chart = new Chart(ctxi, {
+    // The type of chart we want to create
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [
+          <?php echo $pqs; ?>, // current PQS
+          <?php echo $pqs_max-$pqd; ?>, // to reach next tier PQS - 50
+        ],
+        backgroundColor: [
+          window.chartColors.green,
+          window.chartColors.gray,
+        ],
+        label: 'Dataset 1'
+      }],
+      labels: [
+        '<?php echo ' current '.$cBalance ?>',
+        '<?php echo ' left '.$cAvail ?>'
+      ]
     },
-    title: {
-      display: false,
-      text: 'Current Statement'
-    },
-    animation: {
-      duration: 3000,
-      animateScale: false,
-      animateRotate: true
+    options: {
+      responsive: true,
+      legend: {
+        position: 'left',
+      },
+      title: {
+        display: false,
+        text: 'Current Statement'
+      },
+      animation: {
+        duration: 3000,
+        animateScale: false,
+        animateRotate: true
+      }
     }
-  }
-});
+  });
   </script>

@@ -130,6 +130,26 @@ footer {
   font-weight: bolder;
   color: #17a2b8;
 }
+
+.form-label-group > textarea {
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border: 0px;
+  background-clip: padding-box;
+  background-color: transparent;
+  border-radius: 0;
+  border: solid rgba(0, 0, 0, 0.42);
+  border-width: 0 0 3px;
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.form-label-group > textarea:focus {
+  border-radius: 0;
+  border: solid rgba(23, 162, 184, 1);
+  border-width: 0 0 3px;
+  box-shadow: none;
+  transition: all 300ms ease-in-out;
+}
 /* .custom-select, .form-control, .form-control-file {
     background-clip: padding-box;
     background-color: transparent;

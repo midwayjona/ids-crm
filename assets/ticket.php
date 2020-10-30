@@ -11,6 +11,11 @@ if (isset($_POST['form-ticket-submit'])) {
 }
 
 $tid = $_POST['tid'];
+$ucid = 0;
+if ($_SESSION['cadmin']) {
+  # code...
+  $ucid = 1;
+}
 
 ?>
 
@@ -33,7 +38,7 @@ $tid = $_POST['tid'];
         <ul class="nav flex-column">
           <li class="nav-item">
 
-            <a class="nav-link active" href="dashboard.php" role="tab" aria-controls="v-pills-home" aria-selected="true">
+            <a class="nav-link active" href="<?php print ($_SESSION['cadmin'] == 1) ? "cpanel.php" : "dashboard.php"; ?>" role="tab" aria-controls="v-pills-home" aria-selected="true">
               <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                 <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
               </svg>
@@ -184,27 +189,31 @@ $tid = $_POST['tid'];
                       if ($row->ucid == 0) {
                         echo '
                         <tr>
-                          <td style="font-weight:bold; font-size: 0.9em;">
+                          <td style="font-weight:bold; font-size: 0.9em; width: 40%;">
                             '.$newDate.'
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <h5>'.$row->msg.'</h5>
+                            <div style="max-width:50%; word-wrap:break-word;">
+                              <h5 class="h6">'.$row->msg.'</h5>
+                            </div>
                           </td>
                         </tr>
                         ';
                       } else {
                         echo '
-                        <tr>
+                        <trstyle="width:30%">
                           <td style="font-weight:bold; font-size: 0.9em;" align= "right">
                             '.$newDate.'
                             <img class="mx-2" src="media/logo.svg" width="25" height="25" class="d-inline-block align-top" alt="" loading="lazy">
                           </td>
                         </tr>
                         <tr align= "right">
-                          <td >
-                          <h5>'.$row->msg.'</h5>
+                          <td>
+                            <div style="max-width:50%; word-wrap:break-word;">
+                              <h5 class="h6">'.$row->msg.'</h5>
+                            </div>
                           </td>
                         </tr>
                         ';
@@ -214,29 +223,61 @@ $tid = $_POST['tid'];
 
                   </tbody>
                 </table>
-                <div class="mb-5"></div> <!-- spacer -->
-
+              </div>
+              <!-- Chat Box -->
+              <hr>
+            
                 <?php 
                 
                 if ($result->tstatus == 0) {
                   echo '
-                    Ticket closed by agent.
-                  
-                  
+                  <div class="col-lg-12 col-md-8">
+                  <form class="form"  action="'.$path.'includes/comment.inc.php" method="post">
+                    <div class="mb-5"></div>
+                    <!-- ticket id -->
+                    <input type="hidden" name="tid" value="'.$tid.'" id="tid" class="form-control">
+                    <input type="hidden" name="ucid" value="'.$ucid.'" id="ucid" class="form-control">
+                    <!-- text area -->
+                    <div class="form-label-group mb-3">
+                      <textarea class="form-control" name="comment" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-5"></div>
+                    <button class="btn btn-lg btn-outline-dark" type="submit" name="add-comment-submit">Add Comment</button>
+                  </form>
+                </div>
                   ';
                 } else {
                   echo '
                     Ticket closed by agent.
-                  
-                  
                   ';
                 }
-            
+
+                if ($_SESSION['cadmin']) {
+                  # code...
+                  echo '
+                  <div class="mb-5"></div>
+                  <div class="col-lg-12 col-md-8">
+                  <form class="form-signin"  action="'.$path.'includes/close_ticket.inc.php" method="post">
+                    <div class="text-center mb-4">
+                      <h6>set ticket <b>status</b>.</h6>
+                    </div>
+                  
+                    <div class="mb-5"></div>
+                    <input type="hidden" name="tid" value="'.$tid.'" id="tid" class="form-control">
+                    <div class="form-label-group mb-3">
+                      <select id="tstatus" name="tstatus" class="form-control selectpicker" title="" required>
+                        <option value="0">open</option>
+                        <option value="1">closed</option>
+                        <option value="2">resolved</option>
+                      </select>
+                    </div>
+                    <button class="btn btn-md btn-outline-dark" type="submit" name="close-ticket-submit">submit</button>
+                  </form>
+                </div>
+                  ';
+                }
                 ?>
-
-              </div>
-
-              <!-- old table -->
+            
             </div>
 
           </div>

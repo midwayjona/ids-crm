@@ -5,70 +5,45 @@
 require 'dbh.inc.php';
 
 if (isset($_POST['cpanel-signup-submit'])) {
-  $cid = $_POST['cid'];
-  $ctin = $_POST['ctin'];
+  $nit = $_POST['nit'];
+  $dpi = $_POST['dpi'];
   $cname = $_POST['cname'];
+  $cdob = $_POST['cdob'];
   $cphone = $_POST['cphone'];
   $caddress = $_POST['caddress'];
-  $cpwd = $_POST['cpwd'];
-  $cdob = $_POST['cdob'];
   $cemail = $_POST['cemail'];
+  $ccompany = $_POST['ccompany'];
 
-  // optional parameters
-  if (empty($_POST['cuser']) or empty($_POST['cemail']) or empty($_POST['cpwd'])) {
-    $cuser = NULL;
-    $cemail = NULL;
-    $cpwd = NULL;
-    $ob = FALSE;
-  } else {
-    $cuser = $_POST['cuser'];
-    $cemail = $_POST['cemail'];
-    $cpwd = $_POST['cpwd'];
-    $ob = TRUE;
-    $hashedPwd = password_hash($cpwd, PASSWORD_DEFAULT);
-  }
+  // HASHING PASS
+  $cuser = $nit;
+  $cpwd = date("Ym", strtotime($cdob));
+  $cpassword = password_hash($cpwd, PASSWORD_DEFAULT);
+  
 
   // Costumer ID shouldn't exist on record
-  $sql = 'SELECT * FROM costumer WHERE cid = :cid';
+  $sql = 'SELECT * FROM costumer WHERE nit = :nit OR dpi = :dpi';
   $stmt = $conn->prepare($sql);
-  $stmt->execute(['cid' => $cid]);
-  $result = $stmt->fetchAll();
-  if (count($result) > 0) {
-    // code...
+  $stmt->execute(['nit' => $nit, 'dpi' => $dpi]);
+  $num = $stmt->rowCount();
+  
+  if ($num > 0) {
+    # code...
     header("Location: ../assets/cpanel.php?status=ID_EXIST");
     exit();
   }
-  // Costumer TIN shouldn't exist on record
-  $sql = 'SELECT * FROM costumer WHERE ctin = :ctin';
+
+  // ADD COSTUMER
+  $sql = 'INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
+          VALUES (:nit, :dpi, :cname, :cdob, :cphone, :caddress, :cemail, :ccompany, :cuser, :cpassword, DEFAULT)';
   $stmt = $conn->prepare($sql);
-  $stmt->execute(['ctin' => $ctin]);
-  $result = $stmt->fetchAll();
-  if (count($result) > 0) {
-    // code...
-    header("Location: ../assets/cpanel.php?status=TIN_EXIST");
-    exit();
-  }
+  $stmt->execute(['nit' => $nit, 'dpi' => $dpi, 'cname' => $cname, 'cdob' => $cdob, 'cphone' => $cphone, 'caddress' => $caddress, 'cemail' => $cemail, 'ccompany' => $ccompany, 'cuser' => $cuser, 'cpassword' => $cpassword]);
 
-  if ($ob) {
-    // username needs to be unique
-    $sql = 'SELECT cuser FROM costumer WHERE cuser=:cuser';
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['cuser' => $cuser]);
-    $result = $stmt->fetchAll();
-    if (count($result) > 0) { header("Location: ../assets/cpanel.php?status=USER_EXIST"); exit(); }
-
-    // email needs to be unique
-    $sql = 'SELECT cuser FROM costumer WHERE cemail=:cemail';
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['cemail' => $cemail]);
-    $result = $stmt->fetchAll();
-    if (count($result) > 0) { header("Location: ../assets/cpanel.php?status=EMAIL_EXIST"); exit(); }
-  }
-
-  $sql = 'INSERT INTO costumer (cid, ctin, cname, cdob, cuser, cemail, cphone, cpassword, caddress, cadmin)
-          VALUES (:cid, :ctin, :cname, :cdob, :cuser, :cemail, :cphone, :cpassword, :caddress, DEFAULT)';
+  // ADD STATUS PROGRAM TO COSTUMER
+  $sql = 'INSERT INTO cstatus (nit) VALUES (:nit)';
   $stmt = $conn->prepare($sql);
-  $stmt->execute(['cid' => $cid, 'ctin' => $ctin, 'cname' => $cname, 'cdob' => $cdob, 'cuser' => $cuser, 'cemail' => $cemail, 'cphone' => $cphone, 'cpassword' => $hashedPwd, 'caddress' => $caddress]);
+  $stmt->execute(['nit' => $nit]);
+  
+  
   header("Location: ../assets/cpanel.php?status=SIGNUP_SUCCESS");
   exit();
 
