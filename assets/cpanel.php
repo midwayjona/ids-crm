@@ -19,7 +19,20 @@ if ($_SESSION['cadmin'] == FALSE) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
-	<script src="js/utils.js"></script>
+  <script src="js/utils.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+
+<script>
+$(document).ready( function () {
+$('#table_id').DataTable();
+} );
+</script>
 </head>
 <!-- header -->
 
@@ -193,7 +206,10 @@ if ($_SESSION['cadmin'] == FALSE) {
 
 
       <div class="d-flex justify-content-between dash-chart-main flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Mastercash cPanel</h1>
+        <a class="navbar-brand" href="<?php echo $path ?>assets/cpanel.php">
+            <img src="<?php echo $path ?>assets/media/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+            <?php echo $_SESSION['cname'] ?>
+          </a>
 
 
 
@@ -562,16 +578,16 @@ if ($_SESSION['cadmin'] == FALSE) {
             <form class="form-inline my-2 my-lg-0">
               
             <div class="form-label-group">
-              <input type="text" id="myInput" class="form-control mr-sm-2" onkeyup="myFunction()" placeholder="Search by name">
-            </div>
-            
-            <div class="form-label-group">
-            <input type="text" id="myInput" class="form-control mr-sm-2" onkeyup="myFunction()" placeholder="Search by NIT">
+              <input type="text" id="myInput" class="form-control mr-sm-2" placeholder="Search">
             </div>
           
           </form>
 
 
+          
+
+
+          
         <div class="mb-4"></div> <!-- spacer -->
 
 
@@ -629,9 +645,6 @@ if ($_SESSION['cadmin'] == FALSE) {
                           case 4:
                               echo '
                               <p style="color:#70d1f4"><b>
-                                <svg class="svg-icon" viewBox="0 0 20 20" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                <path fill="none" d="M10,0.542c-5.224,0-9.458,4.234-9.458,9.458c0,5.223,4.235,9.459,9.458,9.459c5.224,0,9.458-4.236,9.458-9.459C19.459,4.776,15.225,0.542,10,0.542 M8.923,18.523C4.685,17.992,1.402,14.383,1.402,10c0-4.383,3.283-7.993,7.521-8.524C6.919,3.749,5.701,6.731,5.701,10C5.701,13.27,6.919,16.25,8.923,18.523"></path>
-                                </svg>
                                 Diamond
                               </b></p>';
                               break;
@@ -739,28 +752,31 @@ if ($_SESSION['cadmin'] == FALSE) {
       </main>
     </div>
   </div>
-  <script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
+
+
+
+
+
+  
+  <script>
+function filterTable(event) {
+    var filter = event.target.value.toUpperCase();
+    var rows = document.querySelector("#myTable tbody").rows;
+    
+    for (var i = 0; i < rows.length; i++) {
+        var firstCol = rows[i].cells[0].textContent.toUpperCase();
+        var secondCol = rows[i].cells[1].textContent.toUpperCase();
+        var thirdCol = rows[i].cells[2].textContent.toUpperCase();
+        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }      
     }
-  }
 }
+
+document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 </script>
   <script>
 

@@ -1,5 +1,6 @@
 <!-- relative root -->
 <?php
+date_default_timezone_set('America/Guatemala');
 session_start();
 $path = '';
 include $path.'../includes/dbh.inc.php';
@@ -48,6 +49,23 @@ include $path.'header.php';
                 <path d="M17.728,4.419H2.273c-0.236,0-0.429,0.193-0.429,0.429v10.304c0,0.234,0.193,0.428,0.429,0.428h15.455c0.235,0,0.429-0.193,0.429-0.428V4.849C18.156,4.613,17.963,4.419,17.728,4.419 M17.298,14.721H2.702V9.57h14.596V14.721zM17.298,8.712H2.702V7.424h14.596V8.712z M17.298,6.566H2.702V5.278h14.596V6.566z M9.142,13.005c0,0.235-0.193,0.43-0.43,0.43H4.419c-0.236,0-0.429-0.194-0.429-0.43c0-0.236,0.193-0.429,0.429-0.429h4.292C8.948,12.576,9.142,12.769,9.142,13.005"></path>
               </svg>
               Schedule
+            </a>
+
+            <!-- <a class="nav-link" href="cpanel/costumer.php">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Customer
+            </a> -->
+
+
+          </li>
+
+          <li class="nav-item">
+
+            <a class="nav-link" id="v-pills-ticket-tab" data-toggle="pill" href="#v-pills-ticket" role="tab" aria-controls="v-pills-ticket" aria-selected="false">
+              <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                <path d="M17.218,2.268L2.477,8.388C2.13,8.535,2.164,9.05,2.542,9.134L9.33,10.67l1.535,6.787c0.083,0.377,0.602,0.415,0.745,0.065l6.123-14.74C17.866,2.46,17.539,2.134,17.218,2.268 M3.92,8.641l11.772-4.89L9.535,9.909L3.92,8.641z M11.358,16.078l-1.268-5.613l6.157-6.157L11.358,16.078z"></path>
+              </svg>
+              Support
             </a>
 
             <!-- <a class="nav-link" href="cpanel/costumer.php">
@@ -125,16 +143,16 @@ include $path.'header.php';
 
 
       <div class="d-flex justify-content-between dash-chart-main flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Account Summary</h1>
+        <h1 class="h6">Dashboard</h1>
 
 
 
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-dark mx-1">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-dark mx-1">Export</button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-dark mx-1">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-dark mx-1">Export</button> -->
           </div>
-          <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle">
+          <!-- <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -142,7 +160,7 @@ include $path.'header.php';
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
             This week
-          </button>
+          </button> -->
         </div>
 
       </div>
@@ -220,29 +238,6 @@ include $path.'header.php';
         ?>
       </div>
 
-      <!-- FUNCTIONALITY -->
-      <?php
-      function FormatCreditCard($cc)
-      {
-          // Clean out extra data that might be in the cc
-          $cc = str_replace(array('-',' '), '', $cc);
-          // Get the CC Length
-          $cc_length = strlen($cc);
-          // Initialize the new credit card to contian the last four digits
-          $newCreditCard = substr($cc, -4);
-          // Walk backwards through the credit card number and add a dash after every fourth digit
-          for ($i=$cc_length-5;$i>=0;$i--) {
-              // If on the fourth character add a dash
-              if ((($i+1)-$cc_length)%4 == 0) {
-                  $newCreditCard = '-'.$newCreditCard;
-              }
-              // Add the current character to the new credit card
-              $newCreditCard = $cc[$i].$newCreditCard;
-          }
-          // Return the formatted credit card number
-          return $newCreditCard;
-      }
-      ?>
 
 
         <div class="tab-content" id="v-pills-tabContent">
@@ -321,7 +316,7 @@ include $path.'header.php';
 
 
               <div class="mb-5"></div> <!-- spacer -->
-              <h4><strong>Transaction History</strong></h4>
+              <h4><strong>Recent Transactions</strong></h4>
               <div class="mb-4"></div> <!-- spacer -->
               <div class="table-responsive">
                 <table class="table table-hover">
@@ -353,9 +348,9 @@ include $path.'header.php';
                         echo '
                         <tr>
                           <td scope="row">
-                            <form class="form-sale-submit"  action="cardboard.php" method="post">
+                            <form class="form-invoice-submit"  action="cardboard.php" method="post">
                               <input type="hidden" name="invoice_id" value="'.$row->invoice_id.'" id="invoice_id" class="form-control">
-                              <button class="btn" type="submit" name="delete-costumer-submit" title="Credit Card">
+                              <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
                                 <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                 <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
                                 </svg>
@@ -397,15 +392,124 @@ include $path.'header.php';
 
 
 
-          <!-- PAY TAB -->
-          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-
-
+          <!-- TICKET TAB -->
+          <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel" aria-labelledby="v-pills-ticket-tab">
             <div class="col-lg-12 col-md-8">
+            <div class="mb-5"></div> <!-- spacer -->
+            <h3>Support Center</h3>
 
-            <!-- calendar data -->
+            <!-- TICKET BUTTON -->
+            <div class="mb-5"></div> <!-- spacer -->
+            <div class="col-lg-12 col-md-6">
+              <form class="form"  action="<?php echo $path ?>includes/cpanel_signup.inc.php" method="post">
+                <div class="mb-4"></div>
+                <button class="btn btn-outline-dark" type="submit" name="cpanel-signup-submit">Create Ticket</button>
+              </form>
+            </div>
+            <div class="mb-5"></div> <!-- spacer -->
+            <!-- END TICKET BUTTON -->
 
-            
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+
+                  <tbody>
+                    <thead class="thead-dark">
+                      <tr>
+                      <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <?php
+
+                    $nit = $_SESSION['nit'];
+                    $sql = 'SELECT * FROM ticket WHERE nit = :nit ORDER BY created DESC';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute(['nit' => $nit]);
+  
+                    $row = $stmt->fetchAll();
+                    // SELECT COSTUMER
+                    foreach ($row as $row) {
+                        $orgDate = $row->created;
+                        $newDate = date("F jS h:ia", strtotime($orgDate));
+                        echo '
+                        <tr>
+                          <td scope="row">
+                            <form class="form-ticket-submit"  action="ticket.php" method="post">
+                              <input type="hidden" name="tid" value="'.$row->tid.'" id="tid" class="form-control">
+                              <button class="btn" type="submit" name="submit-ticket" title="Ticket Number">
+                                <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                                </svg>
+                                <b>'.sprintf("%010s", $row->tid).'</b>
+                              </button>
+                            </form>
+                          </td>
+                          <td></td>
+                          <td></td>
+                          
+                          <td>'.$row->msg.'</td>
+                          <td>'.$newDate.'</td>
+
+                          <td class="align-top">';
+                        switch ($row->tstatus) {
+                          case 0:
+                              echo '<p style="color:#088da5" title="We’ve received your message and your ticket is waiting to be responded to by an agent."><b>open</b></p>';
+                              break;
+                          case 1:
+                              echo '<p style="color:#b30000" title="Ticket has been closed."><b>closed</b></p>';
+                              break;
+                          case 2:
+                              echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b>resolved</b></p>';
+                              break;
+                            }
+                        
+                        echo '</td>
+                        </tr>
+
+
+
+                      ';
+                    }
+                     ?>
+
+                  </tbody>
+                </table>
+                <div class="mb-5"></div> <!-- spacer -->
+
+                
+
+              </div> <!-- ./div table -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
           </div>
 

@@ -6,7 +6,7 @@ include $path.'../includes/dbh.inc.php';
 include $path.'../includes/bypass_security.php';
 include $path.'header.php';
 
-if (isset($_POST['form-sale-submit'])) {
+if (isset($_POST['form-invoice-submit'])) {
   // code...
 }
 
@@ -129,109 +129,10 @@ $invoice_id = $_POST['invoice_id'];
 
       </div>
 
-      <div class="col-md-4 mx-auto">
-        <?php
-        if(isset($_GET['status'])) {
-          $status = $_GET['status'];
-          if ($status == 
-
-          'ID_NOT_FOUND') {
-            // code...
-            echo '
-            <div class="alert alert-danger alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              📌 id was not found in our records, check id or contact support.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            ';
-          } elseif ($status == 'ID_ASSIGNED') {
-            // code...
-            echo '
-            <div class="alert alert-danger alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              📌 this id already has an username assigned.
-              <hr>
-              You can close this alert now.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            ';
-          } elseif ($status == 'USER_EXIST') {
-            // code...
-            echo '
-            <div class="alert alert-danger alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              📌 username already exist, please type a different one.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            ';
-          } elseif ($status == 'EMAIL_EXIST') {
-            // code...
-            echo '
-            <div class="alert alert-warning alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              <h4 class="alert-heading">Warning</h4>
-              <hr>
-              📌 <strong>Holy guacamole!</strong> a costumer with the same email already exist, check costumer records.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            ';
-          } elseif ($status == 'ID_EXIST') {
-            // code...
-            echo '
-            <div class="alert alert-warning alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              <h4 class="alert-heading">Warning</h4>
-              <hr>
-              📌 <strong>Holy guacamole!</strong> a costumer with the same id already exist, check costumer records.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            ';
-          }elseif ($status == 'SUCCESS') {
-            // code...
-            echo '
-            <div class="alert alert-success alert-dismissible show fade my-4" id="signupAlert" role="alert">
-              <h4 class="alert-heading">Well done!</h4>
-              <hr>
-              ✔️ credentials stored.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            ';
-          }
-        }
-        ?>
-      </div>
+      
 
       <!-- FUNCTIONALITY -->
-      <?php
-      function FormatCreditCard($cc)
-      {
-        // Clean out extra data that might be in the cc
-        $cc = str_replace(array('-',' '),'',$cc);
-        // Get the CC Length
-        $cc_length = strlen($cc);
-        // Initialize the new credit card to contian the last four digits
-        $newCreditCard = substr($cc,-4);
-        // Walk backwards through the credit card number and add a dash after every fourth digit
-        for($i=$cc_length-5;$i>=0;$i--){
-          // If on the fourth character add a dash
-          if((($i+1)-$cc_length)%4 == 0){
-            $newCreditCard = '-'.$newCreditCard;
-          }
-          // Add the current character to the new credit card
-          $newCreditCard = $cc[$i].$newCreditCard;
-        }
-        // Return the formatted credit card number
-        return $newCreditCard;
 
-      }
-      ?>
 
 
         <div class="tab-content" id="v-pills-tabContent">

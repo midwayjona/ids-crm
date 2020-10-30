@@ -61,6 +61,45 @@ CREATE TABLE sale
    ON DELETE CASCADE
 );
 
+CREATE TABLE ticket 
+(
+  tid SERIAL PRIMARY KEY,
+  nit varchar ( 255 ) NOT NULL,
+  msg varchar ( 255 ) NOT NULL,
+  created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  tstatus int NOT NULL DEFAULT 0,
+  CONSTRAINT fk_nit_ticket
+  FOREIGN KEY (nit)
+   REFERENCES costumer (nit)
+   ON DELETE CASCADE
+);
+
+CREATE TABLE ticket_comment
+(
+  t_cid SERIAL PRIMARY KEY,
+  tid int NOT NULL,
+  ucid int NOT NULL,
+  msg varchar ( 255 ) NOT NULL,
+  created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_ticket
+  FOREIGN KEY (tid)
+   REFERENCES ticket (tid)
+   ON DELETE CASCADE
+);
+
+
+INSERT INTO ticket(nit, msg)
+VALUES (
+  '12345678',
+  'Farnes wont work tho'
+);
+
+INSERT INTO ticket_comment(tid, ucid, msg)
+VALUES (
+  '3',
+  '0',
+  'Okay, fuck you then'
+);
 
 INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)
 VALUES(
@@ -124,86 +163,3 @@ VALUES (
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  CREATE TABLE card
-  (
-    cnumber varchar ( 255 ) NOT NULL,
-    cid varchar ( 255 ) NOT NULL,
-    cvv varchar ( 255 ) NOT NULL,
-    cexp_date DATE NOT Null,
-    cissue_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    climit NUMERIC(8,2) DEFAULT 15000 NOT NULL,
-    cbalance NUMERIC(8,2) DEFAULT 0 NOT NULL,
-    PRIMARY KEY (cnumber),
-    CONSTRAINT fk_cid
-    FOREIGN KEY (cid)
-      REFERENCES costumer (cid)
-      ON DELETE CASCADE
-  );
-
-
-  CREATE TABLE transactions
-  (
-    tid SERIAL PRIMARY KEY,
-    cnumber varchar ( 255 ) NOT NULL,
-    ttype varchar ( 255 ) NOT  NULL,
-    tdate TIMESTAMP
-    WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  tcat int DEFAULT 0,
-  tamount NUMERIC
-    (8,2) DEFAULT 0.00 NOT NULL,
-  cbalance NUMERIC
-    (8,2) DEFAULT 0.00 NOT NULL,
-  description varchar
-    ( 255 ) DEFAULT 'brief description for this transaction',
-  CONSTRAINT fk_cnumber
-    FOREIGN KEY
-    (cnumber)
-      REFERENCES card
-    (cnumber)
-      ON
-    DELETE CASCADE
-);
-
-    CREATE TABLE checking
-    (
-      caccount SERIAL PRIMARY KEY,
-      cid varchar ( 255 ) NOT NULL,
-      caperture_date DATE NOT NULL DEFAULT CURRENT_DATE,
-      cfund NUMERIC(8,2) DEFAULT 15000 NOT NULL,
-      CONSTRAINT fk_cid
-    FOREIGN KEY (cid)
-      REFERENCES costumer (cid)
-      ON DELETE CASCADE
-    );
-
-    CREATE TABLE cmpyID
-    (
-      cmpyID varchar ( 255 ) PRIMARY KEY NOT NULL,
-      cmpyname varchar ( 255 )
-    );
-
-    SET TIMEZONE
-    ='America/Guatemala';
-
-
-
-
-
-    INSERT INTO transactions
-      ( tid, cnumber, ttype, tdate, tcat, description )
-    VALUES
-      ( DEFAULT, '5138703018414458', 'debit', DEFAULT, DEFAULT, 'test transaction');
-
-    SELECT LASTVAL();
