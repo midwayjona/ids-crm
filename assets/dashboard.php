@@ -254,11 +254,16 @@ include $path.'header.php';
                   <section>
                       <ul id="a">
                         <li>
-                          <a href="">
                             <img src="<?php echo $path ?>assets/media/avatar.png" class="bd-placeholder-img rounded-circle" width="160" height="160">
                             <!-- Wrapped into div -->
                             <div class="details">
-                              <h3><strong><?php echo $_SESSION['cname']; ?></strong></h3>
+                              <!-- PROFILE PAGE -->
+                              <form class="form-profile-submit"  action="profile.php" method="post">
+                                <input type="hidden" name="nit" value="<?php echo $_SESSION['nit']; ?>" id="nit" class="form-control">
+                                <button class="btn btn-sm" type="submit" name="profile-submit">
+                                  <h3><strong><?php echo $_SESSION['cname']; ?></strong></h3>
+                                </button>
+                              </form>
                               <h5><?php echo $_SESSION['ccompany']; ?></h5>
                               <div class="mb-3"></div> <!-- spacer -->
                               <h6><span style="font-size: .75rem;text-transform: uppercase;">TIN </span><b><?php echo $_SESSION['nit']; ?></b></h6>
@@ -266,7 +271,7 @@ include $path.'header.php';
                               <h6><span style="font-size: .75rem;text-transform: uppercase;">PHONE </span><b><?php echo $_SESSION['cphone']; ?></b></h6>
                             </div>
 
-                          </a>
+                        
                         </li>
                       </ul>
                     </section>
