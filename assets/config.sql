@@ -98,7 +98,7 @@ INSERT INTO ticket_comment(tid, ucid, msg)
 VALUES (
   '3',
   '0',
-  'Okay, fuck you then'
+  'Thanks, found this btw https://getbootstrap.com/docs/4.1/content/tables/'
 );
 
 INSERT INTO costumer (nit, dpi, cname, cdob, cphone, caddress, cemail, ccompany, cuser, cpassword, cadmin)

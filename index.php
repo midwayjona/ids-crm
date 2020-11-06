@@ -9,14 +9,6 @@
   <div class="row">
     <div class="col-lg-12 col-md-7 mx-auto">
       <?php require __DIR__."/assets/filler.php";?>
-
-      ASDASDASD
-      ASDASDASD
-
-      <?php
-      echo $hashedPwd = password_hash('admin123', PASSWORD_DEFAULT);
-      ?>
-
     </div>
   </div>
 </div>

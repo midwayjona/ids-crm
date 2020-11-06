@@ -101,7 +101,11 @@ if ($_SESSION['cadmin']) {
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
       <!-- TICKET OBJECT FETCH -->
       <?php
-        $sql = 'SELECT * FROM ticket WHERE tid = :tid';
+        $sql = 'SELECT *
+                FROM ticket
+                LEFT JOIN costumer
+                  ON costumer.nit = ticket.nit
+                WHERE tid = :tid';
         $stmt = $conn->prepare($sql);
         $stmt->execute(['tid' => $tid]);
         $result = $stmt->fetchObject();
@@ -163,7 +167,10 @@ if ($_SESSION['cadmin']) {
 
 
               <div class="mb-5"></div> <!-- spacer -->
-              <h4>Title</h4>
+              <h5>Name</h5>
+              <h3><strong><?php echo $result->cname; ?> </strong></h3>
+              <div class="mb-4"></div> <!-- spacer -->
+              <h5>Title</h5>
               <h3><strong><?php echo $result->msg; ?> </strong></h3>
               <div class="mb-4"></div> <!-- spacer -->
 

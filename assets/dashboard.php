@@ -44,9 +44,9 @@ include $path.'header.php';
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+            <a class="nav-link" id="v-pills-calendar-tab" data-toggle="pill" href="#v-pills-calendar" role="tab" aria-controls="v-pills-calendar" aria-selected="false">
               <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                <path d="M17.728,4.419H2.273c-0.236,0-0.429,0.193-0.429,0.429v10.304c0,0.234,0.193,0.428,0.429,0.428h15.455c0.235,0,0.429-0.193,0.429-0.428V4.849C18.156,4.613,17.963,4.419,17.728,4.419 M17.298,14.721H2.702V9.57h14.596V14.721zM17.298,8.712H2.702V7.424h14.596V8.712z M17.298,6.566H2.702V5.278h14.596V6.566z M9.142,13.005c0,0.235-0.193,0.43-0.43,0.43H4.419c-0.236,0-0.429-0.194-0.429-0.43c0-0.236,0.193-0.429,0.429-0.429h4.292C8.948,12.576,9.142,12.769,9.142,13.005"></path>
+              <path d="M10,1.375c-3.17,0-5.75,2.548-5.75,5.682c0,6.685,5.259,11.276,5.483,11.469c0.152,0.132,0.382,0.132,0.534,0c0.224-0.193,5.481-4.784,5.483-11.469C15.75,3.923,13.171,1.375,10,1.375 M10,17.653c-1.064-1.024-4.929-5.127-4.929-10.596c0-2.68,2.212-4.861,4.929-4.861s4.929,2.181,4.929,4.861C14.927,12.518,11.063,16.627,10,17.653 M10,3.839c-1.815,0-3.286,1.47-3.286,3.286s1.47,3.286,3.286,3.286s3.286-1.47,3.286-3.286S11.815,3.839,10,3.839 M10,9.589c-1.359,0-2.464-1.105-2.464-2.464S8.641,4.661,10,4.661s2.464,1.105,2.464,2.464S11.359,9.589,10,9.589"></path>
               </svg>
               Schedule
             </a>
@@ -301,7 +301,7 @@ include $path.'header.php';
                             break;
                         case 4:
                             echo '
-                            <p style="color:#70d1f4"><b>
+                            <p style="color:#70d1f4"><b>Silver
                               Diamond
                             </b></p>';
                             break;
@@ -358,54 +358,68 @@ include $path.'header.php';
                     <thead class="thead-dark">
                       <tr>
                       <th scope="col">Invoice Number</th>
+                        <th scope="col">Date</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Total</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Grand Total</th>
                       </tr>
                     </thead>
                     <?php
 
-                    $nit = $_SESSION['nit'];
-                    $sql = 'SELECT * FROM sale WHERE nit = :nit';
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute(['nit' => $nit]);
-  
-                    $row = $stmt->fetchAll();
-                    // SELECT COSTUMER
-                    foreach ($row as $row) {
-                        $orgDate = $row->created_at;
-                        $newDate = date("M d", strtotime($orgDate));
-                        echo '
-                        <tr>
-                          <td scope="row">
-                            <form class="form-invoice-submit"  action="cardboard.php" method="post">
-                              <input type="hidden" name="invoice_id" value="'.$row->invoice_id.'" id="invoice_id" class="form-control">
-                              <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
-                                <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
-                                </svg>
-                                <b>'.$row->invoice_id.'</b>
-                              </button>
-                            </form>
-                          </td>
-                          <td></td>
-                          <td></td>
+                    // MEMBER STATUS PARAM
+                    $pqd = 0;
+                    $pqs = 0;
+
+                    $url = 'https://ccvi-distributors-project.herokuapp.com/v1/pos/sales/customer/';
+                    $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIwLCJ1c2VybmFtZSI6InNlcnZpY2VhY2NvdW50IiwiZW1haWwiOiIiLCJmdWxsbmFtZSI6IkN1ZW50YSBkZSBTZXJ2aWNpbyBHbG9iYWwiLCJhcHBsaWNhdGlvbnMiOlt7Im5hbWUiOiJzZXJ2aWNlbm9kZSIsIm5vZGVpZCI6MTAsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJST0xFX0lOVEVSTkFMX1NFUlZJQ0UiXSwicGVybWlzc2lvbnMiOltdfX1dLCJpYXQiOjE2MDQwNDgwNDEsImV4cCI6MTYwNjY0MDA0MSwiYXVkIjoiaHR0cDovL2luZ2VuaWVyaWFkZXNvZnR3YXJlMjAyMC5jb20iLCJpc3MiOiJTdXBlciBFUlAgMzAwMCIsInN1YiI6InVzZXJAZXJwMzAwMC5jb20ifQ.UaBRLPU323jkiNaKX0sdS_SWnZSbpUQJVKYOsGjLVYkMZEC5wzz0-KFZEuqOiCbgJcs13tRxTI9IJL7UfAKWVQ';
+
+                    $request_url = $url.$_SESSION['nit'];
+
+                    $curl = curl_init($request_url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                      'Authorization: '.$token,
+                      'Content-Type: application/json'
+                    ]);
+                    $response = curl_exec($curl);
+                    curl_close($curl);
+                    $data = json_decode($response);
+
+                    
+                    
+                    foreach($data as $sale) {
+                      $pqs++;
+                      $pqd = $sale->total_sale + $pqd - $sale->total_discount;
+                      $orgDate = $row->created_at;
+                      $newDate = date("M d", strtotime($orgDate));
+                      echo '
+                      <tr>
+                        <td scope="row">
+                          <form class="form-invoice-submit"  action="cardboard.php" method="post">
+                            <input type="hidden" name="invoice_id" value="'.$sale->sale_id.'" id="invoice_id" class="form-control">
+                            <input type="hidden" name="pos_id" value="1" id="pos_id" class="form-control">
+                            <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
+                              <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                              <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                              </svg>
+                              <b>'.sprintf("%010s", $sale->sale_id).'</b>
+                            </button>
+                          </form>
+                        </td>
 
 
-                          <td>'.$row->sstatus.'</td>
-                          <td>'.sprintf("Q %1\$.2f", strval($row->total)).'</td>
-                          <td>'.sprintf("Q %1\$.2f", strval($row->total_discount)).'</td>
-                          <td><b>'.sprintf("Q %1\$.2f", strval($row->total_sale)).'</b></td>
+                        <td>'.$newDate.'</td>
+                        <td></td>
+                        <td></td>
+                        <td>'.sprintf("Q %1\$.2f", strval($sale->total_discount)).'</td>
+                        <td><b>'.sprintf("Q %1\$.2f", strval($sale->total_sale)).'</b></td>
 
-                        </tr>
+                      </tr>
+                    ';
+                    }        
 
 
-
-                      ';
-                    }
                      ?>
 
                   </tbody>
@@ -548,15 +562,28 @@ include $path.'header.php';
 
 
           <!-- CREATE CARD TAB -->
-          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <div class="tab-pane fade" id="v-pills-calendar" role="tabpanel" aria-labelledby="v-pills-calendar-tab">
+          <div class="col-lg-12 col-md-8">
+            <div class="mb-5"></div> <!-- spacer -->
+            <h3>Calendar</h3>
 
+            <!-- TICKET BUTTON -->
+            <div class="mb-5"></div> <!-- spacer -->
+            <div class="col-lg-12 col-md-6">
+              <form class="form"  action="create_ticket.php" method="post">
+                <div class="mb-4"></div>
+                <button class="btn btn-outline-dark" type="submit" name="create-ticket-submit">Appointment</button>
+              </form>
+            </div>
+            <div class="mb-5"></div> <!-- spacer -->
+            <!-- END TICKET BUTTON -->
+
+            <!-- CALENDAR BODY -->
+
+            </div>
 
           </div>
 
-          <!-- COSTUMERS TAB -->
-
-
-          <!-- CARDS TAB -->
 
 
 
@@ -570,7 +597,7 @@ include $path.'header.php';
   <!-- GET PROGRAM STATUS FOR COSTUMER -->
   <?php
   // MAX VALUES TO REACH NEXT TIER
-  $pqd_max = 100000;
+  $pqd_max = 50;
   $pqs_max = 50;
   ?>
   
@@ -593,8 +620,8 @@ include $path.'header.php';
         label: 'Dataset 1'
       }],
       labels: [
-        '<?php echo ' current '.$cBalance ?>',
-        '<?php echo ' left '.$cAvail ?>'
+        '<?php echo ' current ' ?>',
+        '<?php echo ' left ' ?>'
       ]
     },
     options: {
@@ -622,7 +649,7 @@ include $path.'header.php';
       datasets: [{
         data: [
           <?php echo $pqs; ?>, // current PQS
-          <?php echo $pqs_max-$pqd; ?>, // to reach next tier PQS - 50
+          <?php echo $pqs_max-$pqs; ?>, // to reach next tier PQS - 50
         ],
         backgroundColor: [
           window.chartColors.green,
@@ -631,8 +658,8 @@ include $path.'header.php';
         label: 'Dataset 1'
       }],
       labels: [
-        '<?php echo ' current '.$cBalance ?>',
-        '<?php echo ' left '.$cAvail ?>'
+        '<?php echo ' current '?>',
+        '<?php echo ' left ' ?>'
       ]
     },
     options: {
