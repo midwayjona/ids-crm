@@ -52,41 +52,6 @@ $pos_id = $_POST['pos_id'];
 
         </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
-              <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line>
-              <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-              current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              taxable income
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
 
@@ -162,10 +127,16 @@ $pos_id = $_POST['pos_id'];
             <div class="container">
 
               <?php
-              $url = 'https://ccvi-distributors-project.herokuapp.com/v1/pos/sales/';
-              $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIwLCJ1c2VybmFtZSI6InNlcnZpY2VhY2NvdW50IiwiZW1haWwiOiIiLCJmdWxsbmFtZSI6IkN1ZW50YSBkZSBTZXJ2aWNpbyBHbG9iYWwiLCJhcHBsaWNhdGlvbnMiOlt7Im5hbWUiOiJzZXJ2aWNlbm9kZSIsIm5vZGVpZCI6MTAsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJST0xFX0lOVEVSTkFMX1NFUlZJQ0UiXSwicGVybWlzc2lvbnMiOltdfX1dLCJpYXQiOjE2MDQwNDgwNDEsImV4cCI6MTYwNjY0MDA0MSwiYXVkIjoiaHR0cDovL2luZ2VuaWVyaWFkZXNvZnR3YXJlMjAyMC5jb20iLCJpc3MiOiJTdXBlciBFUlAgMzAwMCIsInN1YiI6InVzZXJAZXJwMzAwMC5jb20ifQ.UaBRLPU323jkiNaKX0sdS_SWnZSbpUQJVKYOsGjLVYkMZEC5wzz0-KFZEuqOiCbgJcs13tRxTI9IJL7UfAKWVQ';
 
-              $request_url = $url.$invoice_id;
+              if ($pos_id == 1) {
+                $url = 'https://ccvi-distributors-project.herokuapp.com/v1/pos/sales/';
+                $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIwLCJ1c2VybmFtZSI6InNlcnZpY2VhY2NvdW50IiwiZW1haWwiOiIiLCJmdWxsbmFtZSI6IkN1ZW50YSBkZSBTZXJ2aWNpbyBHbG9iYWwiLCJhcHBsaWNhdGlvbnMiOlt7Im5hbWUiOiJzZXJ2aWNlbm9kZSIsIm5vZGVpZCI6MTAsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJST0xFX0lOVEVSTkFMX1NFUlZJQ0UiXSwicGVybWlzc2lvbnMiOltdfX1dLCJpYXQiOjE2MDQwNDgwNDEsImV4cCI6MTYwNjY0MDA0MSwiYXVkIjoiaHR0cDovL2luZ2VuaWVyaWFkZXNvZnR3YXJlMjAyMC5jb20iLCJpc3MiOiJTdXBlciBFUlAgMzAwMCIsInN1YiI6InVzZXJAZXJwMzAwMC5jb20ifQ.UaBRLPU323jkiNaKX0sdS_SWnZSbpUQJVKYOsGjLVYkMZEC5wzz0-KFZEuqOiCbgJcs13tRxTI9IJL7UfAKWVQ';
+                $request_url = $url.$invoice_id;
+              } else {
+                $url = 'https://is-pos-api-gp6.herokuapp.com/sales/';
+                $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIwLCJ1c2VybmFtZSI6InNlcnZpY2VhY2NvdW50IiwiZW1haWwiOiIiLCJmdWxsbmFtZSI6IkN1ZW50YSBkZSBTZXJ2aWNpbyBHbG9iYWwiLCJhcHBsaWNhdGlvbnMiOlt7Im5hbWUiOiJzZXJ2aWNlbm9kZSIsIm5vZGVpZCI6MTAsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJST0xFX0lOVEVSTkFMX1NFUlZJQ0UiXSwicGVybWlzc2lvbnMiOltdfX1dLCJpYXQiOjE2MDQwNDgwNDEsImV4cCI6MTYwNjY0MDA0MSwiYXVkIjoiaHR0cDovL2luZ2VuaWVyaWFkZXNvZnR3YXJlMjAyMC5jb20iLCJpc3MiOiJTdXBlciBFUlAgMzAwMCIsInN1YiI6InVzZXJAZXJwMzAwMC5jb20ifQ.UaBRLPU323jkiNaKX0sdS_SWnZSbpUQJVKYOsGjLVYkMZEC5wzz0-KFZEuqOiCbgJcs13tRxTI9IJL7UfAKWVQ';
+                $request_url = $url.$invoice_id;
+              }
 
               $curl = curl_init($request_url);
               curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -190,14 +161,14 @@ $pos_id = $_POST['pos_id'];
 
               <div class="row">
                 <div class="col-lg-6">
-                  <h1 class="h4">Invoice Number <b><?php echo sprintf("%010s", $data->invoice_id) ?></b></h1>
+                  <h1 class="h4">Invoice Number <b><?php if ($pos_id == 1) { echo sprintf("%010s", $data->invoice_id);} else {echo sprintf("%010s", $data->id_sale);}?></b></h1>
                   <h1 class="h5">Created By <b><?php echo $data->created_by ?></b></h1>
                   <h1 class="h5">Date <b><?php echo date("d M y", strtotime($data->created_at)) ?></b></h1>
                 </div><!-- /.col-lg-4 -->
 
                 <div class="col-lg-6">
                   <h4 class="h4">POS <strong><?php echo $pos_id ?></strong></h4>
-                  <h4 class="h5">Warehouse <strong><?php echo $data->branch_id ?></strong></h4>
+                  <h4 class="h5">Warehouse <strong><?php if ($pos_id == 1) { echo $data->branch_id;} else {echo $data->id_bodega;} ?></strong></h4>
                 </div><!-- /.col-lg-4 -->
               </div><!-- /.row -->
 
@@ -234,7 +205,13 @@ $pos_id = $_POST['pos_id'];
                           <td></td>
                           <td></td>
                           <td scope="row">
-                            <a style="color: black;" href="download.php?id='.$data->sale_id.'" target="_blank">
+                            <a style="color: black;" href="download.php?'; 
+                            if ($pos_id == 1) {
+                              echo 'id='.$data->sale_id.'&pos=1';
+                            } else {
+                              echo 'id='.$data->id_sale.'&pos=2';
+                            }
+                            echo'" target="_blank">
                               <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                 <path d="M4.317,16.411c-1.423-1.423-1.423-3.737,0-5.16l8.075-7.984c0.994-0.996,2.613-0.996,3.611,0.001C17,4.264,17,5.884,16.004,6.88l-8.075,7.984c-0.568,0.568-1.493,0.569-2.063-0.001c-0.569-0.569-0.569-1.495,0-2.064L9.93,8.828c0.145-0.141,0.376-0.139,0.517,0.005c0.141,0.144,0.139,0.375-0.006,0.516l-4.062,3.968c-0.282,0.282-0.282,0.745,0.003,1.03c0.285,0.284,0.747,0.284,1.032,0l8.074-7.985c0.711-0.71,0.711-1.868-0.002-2.579c-0.711-0.712-1.867-0.712-2.58,0l-8.074,7.984c-1.137,1.137-1.137,2.988,0.001,4.127c1.14,1.14,2.989,1.14,4.129,0l6.989-6.896c0.143-0.142,0.375-0.14,0.516,0.003c0.143,0.143,0.141,0.374-0.002,0.516l-6.988,6.895C8.054,17.836,5.743,17.836,4.317,16.411"></path>
                               </svg>
@@ -273,22 +250,6 @@ Chart.defaults.global.legend.display = false;
 
 
 
-<?php
-$sql = 'SELECT * FROM transactions WHERE cnumber = :cnumber';
-$stmt = $conn->prepare($sql);
-$stmt->execute(['cnumber' => $cnumber]);
-$result = $stmt->fetchAll();
-// Cats
-$food=0;$cloth=0;$tools=0;$home=0;
-foreach ($result as $result) {
-  // code...
-  if ($result->tcat ==0) {$food ++;}
-  elseif ($result->tcat ==1) {$cloth ++;}
-  elseif ($result->tcat ==2) {$tools ++;}
-  elseif ($result->tcat ==3) {$home ++;}
-}
-
- ?>
 var ctxi = document.getElementById('myChart2').getContext('2d');
 var chart = new Chart(ctxi, {
   // The type of chart we want to create

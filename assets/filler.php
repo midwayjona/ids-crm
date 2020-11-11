@@ -10,7 +10,7 @@
         <img class="bd-placeholder-img img-fluid" alt="Responsive image" width="100%" height="100%" src="<?php echo $path ?>assets/media/crm.png" alt="">
         <div class="container">
           <div class="carousel-caption text-left">
-            <h1>Experience the best Customer Relationship Management</h1>
+            <h1>Customer Relationship Management</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
             <p><a class="btn btn-lg btn-outline-light" href="#" role="button">Sign up today</a></p>
           </div>
@@ -21,7 +21,7 @@
         <img class="bd-placeholder-img img-fluid" alt="Responsive image" width="100%" height="100%" src="<?php echo $path ?>assets/media/getcard.jpg" alt="">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Find the Mastercard that's right for you</h1>
+            <h1>Find the CRM that's right for you</h1>
             <p>Giving you the flexibility to explore the places and pursuits that matter most to you</p>
             <p><a class="btn btn-lg btn-outline-light" href="#" role="button">Learn more</a></p>
           </div>
@@ -71,7 +71,7 @@
         <div class="col-lg-4">
           <img src="https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/atom_page_thumbnail/public/thumbnails/image/Placeholder_person.png" class="bd-placeholder-img rounded-circle" width="140" height="140">
           <div class="mb-4"></div> <!-- spacer -->
-          <h2>Jose Farnes</h2>
+          <h2>John Doe</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>          <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->

@@ -133,7 +133,7 @@ $nit = $_POST['nit'];
                 <button type="reset" class="btn btn-md btn-light">Clear</button>
 
                 <div class="mb-4"></div>
-                <button class="btn btn-lg btn-outline-dark btn-block" type="submit" name="create-ticket-form" onclick="disableSubmitButton();">Submit Ticket</button>
+                <button class="btn btn-lg btn-outline-dark btn-block" type="submit" name="create-ticket-form">Submit Ticket</button>
 
               </form>
             </div>
@@ -155,10 +155,3 @@ $nit = $_POST['nit'];
 </div>
 </div>
 
-<script language="javascript">
-<!--
-    function disableSubmitButton() {
-        // you may fill in the blanks :)
-    }
--->
-</script>

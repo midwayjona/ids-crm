@@ -6,7 +6,7 @@ include $path.'../includes/dbh.inc.php';
 include $path.'../includes/bypass_security.php';
 include $path.'header.php';
 
-if (isset($_POST['profile-submit'])) {
+if (isset($_POST['submit-costumer-edit'])) {
   $nit = $_POST['nit'];
 
   ?>
@@ -31,7 +31,7 @@ if (isset($_POST['profile-submit'])) {
           <ul class="nav flex-column">
             <li class="nav-item">
   
-              <a class="nav-link active" href="dashboard.php" role="tab" aria-controls="v-pills-home" aria-selected="true">
+              <a class="nav-link active" href="cpanel.php" role="tab" aria-controls="v-pills-home" aria-selected="true">
                 <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                   <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
                 </svg>
@@ -98,14 +98,14 @@ if (isset($_POST['profile-submit'])) {
               <?php
               $sql = 'SELECT * FROM costumer WHERE nit = :nit';
               $stmt = $conn->prepare($sql);
-              $stmt->execute(['nit' => $_SESSION['nit']]);
+              $stmt->execute(['nit' => $nit]);
               $result = $stmt->fetchObject();
               ?>
   
                 <div class="mb-4"></div> <!-- spacer -->
   
                 <div class="col-lg-12 col-md-8">
-                <form class="form-signin"  action="<?php echo $path ?>includes/cpanel_signup.inc.php" method="post">
+                <form class="form-signin"  action="<?php echo $path ?>includes/admin_costumer_update.inc.php" method="post">
   
                   <div class="text-center mb-4">
                     <svg class="svg-icon" viewBox="0 0 20 20" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
@@ -113,7 +113,7 @@ if (isset($_POST['profile-submit'])) {
                       <path fill="none" d="M10,12.503c-4.418,0-7.878,2.058-7.878,4.685c0,0.288,0.231,0.52,0.52,0.52c0.287,0,0.519-0.231,0.519-0.52c0-1.976,3.132-3.646,6.84-3.646c3.707,0,6.838,1.671,6.838,3.646c0,0.288,0.234,0.52,0.521,0.52s0.52-0.231,0.52-0.52C17.879,14.561,14.418,12.503,10,12.503z"></path>
                     </svg>
                     <div class="mb-4"></div> <!-- spacer -->
-                    <h6>Review your <b>information</b>.</h6>
+                    <h6>Review costumer <b>information</b>.</h6>
                   </div>
                   <div class="mb-5"></div>
   
@@ -129,38 +129,44 @@ if (isset($_POST['profile-submit'])) {
   
                   <div class="form-label-group mb-3">
                     <label for="input_cname">Name</label>
-                    <input type="text" name="cname" id="input_cname" value="<?php echo $result->cname ?>" class="form-control"  required="" readonly>
+                    <input type="text" name="cname" id="input_cname" value="<?php echo $result->cname ?>" class="form-control"  required="">
                   </div>
   
                   <div class="form-label-group mb-3">
                     <label for="input_ccompany">Company</label>
-                    <input type="text" name="ccompany" id="input_ccompany" value="<?php echo $result->ccompany ?>" class="form-control"  required="" readonly>
+                    <input type="text" name="ccompany" id="input_ccompany" value="<?php echo $result->ccompany ?>" class="form-control"  required="">
                   </div>
   
                   <div class="form-label-group mb-3">
                     <label for="input_cdob">Date of Birth</label>
-                    <input type="date" name="cdob" id="input_cdob" value="<?php echo $result->cdob ?>" class="form-control" readonly>
+                    <input type="date" name="cdob" id="input_cdob" value="<?php echo $result->cdob ?>" class="form-control">
                   </div>
   
                   <div class="form-label-group mb-3">
                     <label for="input_cphone">Phone</label>
-                    <input type="text" name="cphone" id="input_cphone" value="<?php echo $result->cphone ?>" class="form-control phone" readonly>
+                    <input type="text" name="cphone" id="input_cphone" value="<?php echo $result->cphone ?>" class="form-control phone">
                   </div>
   
                   <div class="form-label-group mb-3">
                     <label for="input_cemail">Email</label>
-                    <input type="text" name="cemail" id="input_cemail" value="<?php echo $result->cemail ?>" class="form-control" readonly>
+                    <input type="text" name="cemail" id="input_cemail" value="<?php echo $result->cemail ?>" class="form-control">
                   </div>
   
                   <div class="form-label-group mb-3">
                     <label for="input_caddress">Address</label>
-                    <textarea class="form-control" name="caddress" id =input_caddress" rows="4" required readonly><?php echo $result->caddress ?></textarea>
+                    <textarea class="form-control" name="caddress" id =input_caddress" rows="4" required><?php echo $result->caddress ?></textarea>
                   </div>
   
-
-  
                   <div class="mb-4"></div>
+                <button type="reset" class="btn btn-md btn-dark">Reset</button>
 
+                <div class="mb-4"></div>
+                <button class="btn btn-lg btn-outline-dark btn-block" type="submit" name="admin-costumer-update-submit">Submit</button>
+                </form>
+                <!-- DELETE BUTTON -->
+                <form class="form-signin"  action="<?php echo $path ?>includes/admin_costumer_delete.inc.php" method="post">
+                  <input type="hidden" name="nit" id="input_nit" value="<?php echo $result->nit ?>">
+                  <button class="btn btn-sm btn btn-outline-danger btn-block" type="submit" name="admin-costumer-delete-submit">DELETE</button>
                 </form>
               </div>
                 
@@ -179,7 +185,7 @@ if (isset($_POST['profile-submit'])) {
 
 <?php
 } else {
-  header("Location: dashboard.php");
+  header("Location: cpanel.php");
   exit();
 }
 

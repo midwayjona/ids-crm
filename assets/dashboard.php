@@ -42,6 +42,23 @@ include $path.'header.php';
               Dashbodard <span class="sr-only">(current)</span>
             </a> -->
           </li>
+
+          <li class="nav-item">
+
+            <a class="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-controls="v-pills-transaction" aria-selected="false">
+              <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+              <path d="M17.896,12.706v-0.005v-0.003L15.855,2.507c-0.046-0.24-0.255-0.413-0.5-0.413H4.899c-0.24,0-0.447,0.166-0.498,0.4L2.106,12.696c-0.008,0.035-0.013,0.071-0.013,0.107v4.593c0,0.28,0.229,0.51,0.51,0.51h14.792c0.28,0,0.51-0.229,0.51-0.51v-4.593C17.906,12.77,17.904,12.737,17.896,12.706 M5.31,3.114h9.625l1.842,9.179h-4.481c-0.28,0-0.51,0.229-0.51,0.511c0,0.703-1.081,1.546-1.785,1.546c-0.704,0-1.785-0.843-1.785-1.546c0-0.281-0.229-0.511-0.51-0.511H3.239L5.31,3.114zM16.886,16.886H3.114v-3.572H7.25c0.235,1.021,1.658,2.032,2.75,2.032c1.092,0,2.515-1.012,2.749-2.032h4.137V16.886z"></path>
+              </svg>
+              Transactions
+            </a>
+
+            <!-- <a class="nav-link" href="cpanel/costumer.php">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Customer
+            </a> -->
+
+
+          </li>          
           <li class="nav-item">
 
             <a class="nav-link" id="v-pills-calendar-tab" data-toggle="pill" href="#v-pills-calendar" role="tab" aria-controls="v-pills-calendar" aria-selected="false">
@@ -372,56 +389,112 @@ include $path.'header.php';
                     </thead>
                     <?php
 
-                    // MEMBER STATUS PARAM
-                    $pqd = 0;
-                    $pqs = 0;
-
-                    $url = 'https://ccvi-distributors-project.herokuapp.com/v1/pos/sales/customer/';
                     $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIwLCJ1c2VybmFtZSI6InNlcnZpY2VhY2NvdW50IiwiZW1haWwiOiIiLCJmdWxsbmFtZSI6IkN1ZW50YSBkZSBTZXJ2aWNpbyBHbG9iYWwiLCJhcHBsaWNhdGlvbnMiOlt7Im5hbWUiOiJzZXJ2aWNlbm9kZSIsIm5vZGVpZCI6MTAsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJST0xFX0lOVEVSTkFMX1NFUlZJQ0UiXSwicGVybWlzc2lvbnMiOltdfX1dLCJpYXQiOjE2MDQwNDgwNDEsImV4cCI6MTYwNjY0MDA0MSwiYXVkIjoiaHR0cDovL2luZ2VuaWVyaWFkZXNvZnR3YXJlMjAyMC5jb20iLCJpc3MiOiJTdXBlciBFUlAgMzAwMCIsInN1YiI6InVzZXJAZXJwMzAwMC5jb20ifQ.UaBRLPU323jkiNaKX0sdS_SWnZSbpUQJVKYOsGjLVYkMZEC5wzz0-KFZEuqOiCbgJcs13tRxTI9IJL7UfAKWVQ';
 
-                    $request_url = $url.$_SESSION['nit'];
-
-                    $curl = curl_init($request_url);
+                    $url1 = 'https://ccvi-distributors-project.herokuapp.com/v1/pos/sales/customer/';
+                    $request_url1 = $url1.$_SESSION['nit'];
+                    $curl = curl_init($request_url1);
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($curl, CURLOPT_HTTPHEADER, [
                       'Authorization: '.$token,
                       'Content-Type: application/json'
                     ]);
-                    $response = curl_exec($curl);
+                    $response1 = curl_exec($curl);
                     curl_close($curl);
-                    $data = json_decode($response);
+                    $data1 = json_decode($response1);
+
+                    $url2 = 'https://is-pos-api-gp6.herokuapp.com/sales/customer/';
+                    $request_url2 = $url2.$_SESSION['nit'];
+                    $curl = curl_init($request_url2);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                      'Authorization: '.$token,
+                      'Content-Type: application/json'
+                    ]);
+                    $response2 = curl_exec($curl);
+                    curl_close($curl);
+                    $data2 = json_decode($response2);
+
+
+                    $data = array_merge($data1, $data2);
+
+                    $count = 0;
+
+                    
+
+
 
                     
                     
                     foreach($data as $sale) {
+                      $count++;
                       $pqs++;
                       $pqd = $sale->total_sale + $pqd - $sale->total_discount;
-                      $orgDate = $row->created_at;
+                      $orgDate = $sale->created_at;
                       $newDate = date("M d", strtotime($orgDate));
-                      echo '
-                      <tr>
-                        <td scope="row">
-                          <form class="form-invoice-submit"  action="cardboard.php" method="post">
-                            <input type="hidden" name="invoice_id" value="'.$sale->sale_id.'" id="invoice_id" class="form-control">
-                            <input type="hidden" name="pos_id" value="1" id="pos_id" class="form-control">
-                            <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
-                              <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                              <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
-                              </svg>
-                              <b>'.sprintf("%010s", $sale->sale_id).'</b>
-                            </button>
-                          </form>
-                        </td>
+
+                      if ($count > 5) {
+                        # code...
+                      break;
+                      } else {
+
+                        if ($sale->store_slug == "pos_1") {
+                          echo '
+                          <tr>
+                            <td scope="row">
+                              <form class="form-invoice-submit"  action="cardboard.php" method="post">
+                                <input type="hidden" name="invoice_id" value="'.$sale->sale_id.'" id="invoice_id" class="form-control">
+                                <input type="hidden" name="pos_id" value="1" id="pos_id" class="form-control">
+                                <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
+                                  <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                  <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                                  </svg>
+                                  <b>'.sprintf("%010s", $sale->sale_id).'</b>
+                                </button>
+                              </form>
+                            </td>
+    
+    
+                            <td>'.$newDate.'</td>
+                            <td></td>
+                            <td></td>
+                            <td>'.sprintf("Q %1\$.2f", strval($sale->total_discount)).'</td>
+                            <td><b>'.sprintf("Q %1\$.2f", strval($sale->total_sale)).'</b></td>
+    
+                          </tr>
+                        ';
+                        } else {
+                          echo '
+                          <tr>
+                            <td scope="row">
+                              <form class="form-invoice-submit"  action="cardboard.php" method="post">
+                                <input type="hidden" name="invoice_id" value="'.$sale->id_sale.'" id="invoice_id" class="form-control">
+                                <input type="hidden" name="pos_id" value="2" id="pos_id" class="form-control">
+                                <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
+                                  <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                  <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                                  </svg>
+                                  <b>'.sprintf("%010s", $sale->id_sale).'</b>
+                                </button>
+                              </form>
+                            </td>
+    
+    
+                            <td>'.$newDate.'</td>
+                            <td></td>
+                            <td></td>
+                            <td>'.sprintf("Q %1\$.2f", strval($sale->total_discount)).'</td>
+                            <td><b>'.sprintf("Q %1\$.2f", strval($sale->total_sale)).'</b></td>
+    
+                          </tr>
+                        ';
+                        }
 
 
-                        <td>'.$newDate.'</td>
-                        <td></td>
-                        <td></td>
-                        <td>'.sprintf("Q %1\$.2f", strval($sale->total_discount)).'</td>
-                        <td><b>'.sprintf("Q %1\$.2f", strval($sale->total_sale)).'</b></td>
+                      }
 
-                      </tr>
-                    ';
+                      
+
                     }        
 
 
@@ -513,10 +586,10 @@ include $path.'header.php';
                               echo '<p style="color:#088da5" title="We’ve received your message and your ticket is waiting to be responded to by an agent."><b>open</b></p>';
                               break;
                           case 1:
-                              echo '<p style="color:#b30000" title="Ticket has been closed."><b>closed</b></p>';
+                              echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b>resolved</b></p>';
                               break;
                           case 2:
-                              echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b>resolved</b></p>';
+                              echo '<p style="color:#b30000" title="Ticket has been closed."><b>closed</b></p>';
                               break;
                             }
                         
@@ -565,6 +638,145 @@ include $path.'header.php';
             </div>
           </div>
 
+          <!-- TRANSACTION TAB -->
+          <div class="tab-pane fade" id="v-pills-transaction" role="tabpanel" aria-labelledby="v-pills-transaction-tab">
+          <div class="col-lg-12 col-md-8">
+            <div class="mb-5"></div> <!-- spacer -->
+            <h3>Transactions</h3>
+            <div class="mb-5"></div> <!-- spacer -->
+
+            <!-- TABLE BODY -->
+            <div class="table-responsive">
+                <table class="table table-hover">
+
+                  <tbody>
+                    <thead class="thead-dark">
+                      <tr>
+                      <th scope="col">Invoice Number</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Grand Total</th>
+                      </tr>
+                    </thead>
+                    <?php
+
+                    // MEMBER STATUS PARAM
+                    $pqd = 0;
+                    $pqs = 0;
+
+                    $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIwLCJ1c2VybmFtZSI6InNlcnZpY2VhY2NvdW50IiwiZW1haWwiOiIiLCJmdWxsbmFtZSI6IkN1ZW50YSBkZSBTZXJ2aWNpbyBHbG9iYWwiLCJhcHBsaWNhdGlvbnMiOlt7Im5hbWUiOiJzZXJ2aWNlbm9kZSIsIm5vZGVpZCI6MTAsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJST0xFX0lOVEVSTkFMX1NFUlZJQ0UiXSwicGVybWlzc2lvbnMiOltdfX1dLCJpYXQiOjE2MDQwNDgwNDEsImV4cCI6MTYwNjY0MDA0MSwiYXVkIjoiaHR0cDovL2luZ2VuaWVyaWFkZXNvZnR3YXJlMjAyMC5jb20iLCJpc3MiOiJTdXBlciBFUlAgMzAwMCIsInN1YiI6InVzZXJAZXJwMzAwMC5jb20ifQ.UaBRLPU323jkiNaKX0sdS_SWnZSbpUQJVKYOsGjLVYkMZEC5wzz0-KFZEuqOiCbgJcs13tRxTI9IJL7UfAKWVQ';
+
+                    $url1 = 'https://ccvi-distributors-project.herokuapp.com/v1/pos/sales/customer/';
+                    $request_url1 = $url1.$_SESSION['nit'];
+                    $curl = curl_init($request_url1);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                      'Authorization: '.$token,
+                      'Content-Type: application/json'
+                    ]);
+                    $response1 = curl_exec($curl);
+                    curl_close($curl);
+                    $data1 = json_decode($response1);
+
+                    $url2 = 'https://is-pos-api-gp6.herokuapp.com/sales/customer/';
+                    $request_url2 = $url2.$_SESSION['nit'];
+                    $curl = curl_init($request_url2);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                      'Authorization: '.$token,
+                      'Content-Type: application/json'
+                    ]);
+                    $response2 = curl_exec($curl);
+                    curl_close($curl);
+                    $data2 = json_decode($response2);
+
+
+                    $data = array_merge($data1, $data2);
+
+                    
+
+
+
+                    
+                    
+                    foreach($data as $sale) {
+                      $pqs++;
+                      $pqd = $sale->total_sale + $pqd - $sale->total_discount;
+                      $orgDate = $sale->created_at;
+                      $newDate = date("M d", strtotime($orgDate));
+
+                      if ($sale->store_slug == "pos_1") {
+                        echo '
+                        <tr>
+                          <td scope="row">
+                            <form class="form-invoice-submit"  action="cardboard.php" method="post">
+                              <input type="hidden" name="invoice_id" value="'.$sale->sale_id.'" id="invoice_id" class="form-control">
+                              <input type="hidden" name="pos_id" value="1" id="pos_id" class="form-control">
+                              <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
+                                <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                                </svg>
+                                <b>'.sprintf("%010s", $sale->sale_id).'</b>
+                              </button>
+                            </form>
+                          </td>
+  
+  
+                          <td>'.$newDate.'</td>
+                          <td></td>
+                          <td></td>
+                          <td>'.sprintf("Q %1\$.2f", strval($sale->total_discount)).'</td>
+                          <td><b>'.sprintf("Q %1\$.2f", strval($sale->total_sale)).'</b></td>
+  
+                        </tr>
+                      ';
+                      } else {
+                        echo '
+                        <tr>
+                          <td scope="row">
+                            <form class="form-invoice-submit"  action="cardboard.php" method="post">
+                              <input type="hidden" name="invoice_id" value="'.$sale->id_sale.'" id="invoice_id" class="form-control">
+                              <input type="hidden" name="pos_id" value="2" id="pos_id" class="form-control">
+                              <button class="btn" type="submit" name="delete-costumer-submit" title="Invoice Number">
+                                <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                                </svg>
+                                <b>'.sprintf("%010s", $sale->id_sale).'</b>
+                              </button>
+                            </form>
+                          </td>
+  
+  
+                          <td>'.$newDate.'</td>
+                          <td></td>
+                          <td></td>
+                          <td>'.sprintf("Q %1\$.2f", strval($sale->total_discount)).'</td>
+                          <td><b>'.sprintf("Q %1\$.2f", strval($sale->total_sale)).'</b></td>
+  
+                        </tr>
+                      ';
+                      }
+
+                    }        
+
+
+                     ?>
+
+                  </tbody>
+                </table>
+                <div class="mb-5"></div> <!-- spacer -->
+
+                
+
+              </div>
+            </div>
+
+          </div>
+
+
+
 
           <!-- CREATE CARD TAB -->
           <div class="tab-pane fade" id="v-pills-calendar" role="tabpanel" aria-labelledby="v-pills-calendar-tab">
@@ -575,16 +787,13 @@ include $path.'header.php';
             <!-- TICKET BUTTON -->
             <div class="mb-5"></div> <!-- spacer -->
             <div class="col-lg-12 col-md-6">
-              <form class="form"  action="create_ticket.php" method="post">
-                <div class="mb-4"></div>
-                <button class="btn btn-outline-dark" type="submit" name="create-ticket-submit">Appointment</button>
-              </form>
+            <a class="btn btn-outline-dark" href="http://planningtool.unaux.com/dist/login.php" target="_blank">Open Planner</a>
+
             </div>
             <div class="mb-5"></div> <!-- spacer -->
             <!-- END TICKET BUTTON -->
 
             <!-- CALENDAR BODY -->
-
             </div>
 
           </div>

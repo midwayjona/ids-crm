@@ -127,10 +127,10 @@ if ($_SESSION['cadmin']) {
                 echo '<p style="color:#088da5" title="We’ve received your message and your ticket is waiting to be responded to by an agent."><b> open</b></p>';
                 break;
               case 1:
-                echo '<p style="color:#b30000" title="Ticket has been closed."><b> closed</b></p>';
+                echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b> resolved</b></p>';
                 break;
               case 2:
-                echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b> resolved</b></p>';
+                echo '<p style="color:#b30000" title="Ticket has been closed."><b> closed</b></p>';
                 break;
               } ?></div>
           <!-- <div class="btn-group mr-2">
@@ -274,8 +274,8 @@ if ($_SESSION['cadmin']) {
                     <div class="form-label-group mb-3">
                       <select id="tstatus" name="tstatus" class="form-control selectpicker" title="" required>
                         <option value="0">open</option>
-                        <option value="1">closed</option>
-                        <option value="2">resolved</option>
+                        <option value="1">resolved</option>
+                        <option value="2">closed</option>
                       </select>
                     </div>
                     <button class="btn btn-md btn-outline-dark" type="submit" name="close-ticket-submit">submit</button>

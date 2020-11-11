@@ -394,7 +394,7 @@ $('#table_id').DataTable();
                 <button type="reset" class="btn btn-md btn-light">Clear</button>
 
                 <div class="mb-4"></div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit" name="cpanel-signup-submit">Enroll in  Mastercash©</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="cpanel-signup-submit">Submit</button>
 
               </form>
             </div>
@@ -556,7 +556,7 @@ $('#table_id').DataTable();
           <div class="table-responsive">
             <form class="form-inline my-2 my-lg-0">
               <div class="form-label-group">
-                <input type="text" id="myInput" class="form-control mr-sm-2" placeholder="Search">
+                <input type="text" id="myInputTicket" class="form-control mr-sm-2" placeholder="Search">
               </div>
             </form>
             <div class="mb-4"></div> <!-- spacer -->
@@ -598,10 +598,10 @@ $('#table_id').DataTable();
                                 echo '<p style="color:#088da5" title="We’ve received your message and your ticket is waiting to be responded to by an agent."><b>open</b></p>';
                                 break;
                             case 1:
-                                echo '<p style="color:#b30000" title="Ticket has been closed."><b>closed</b></p>';
+                                echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b>resolved</b></p>';
                                 break;
                             case 2:
-                                echo '<p style="color:#037d50" title="A determination has been made and your ticket has been closed."><b>resolved</b></p>';
+                                echo '<p style="color:#b30000" title="Ticket has been closed."><b>closed</b></p>';
                                 break;
                           }
                           echo '</b>
@@ -672,13 +672,13 @@ $('#table_id').DataTable();
               <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">DPI</th>
                     <th scope="col">NIT</th>
+                    <th scope="col">DPI</th>
                     <th scope="col">Name</th>
                     <th scope="col">Status</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">Actions</th>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -697,8 +697,18 @@ $('#table_id').DataTable();
                   foreach ($row as $row) {
                     echo '
                       <tr>
-                        <td scope="row"><b>'.$row->dpi.'</b></td>
-                        <td>'.$row->nit.'</td>
+                        <td scope="row">
+                          <form class="form-ticket-submit"  action="costumer.php" method="post">
+                            <input type="hidden" name="nit" value="'.$row->nit.'" id="nit" class="form-control">
+                            <button class="btn" type="submit" name="submit-costumer-edit" title="NIT">
+                              <svg class="svg-icon" viewBox="0 0 25 25" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
+                              </svg>
+                              <b>'.$row->nit.'</b>
+                            </button>
+                          </form>
+                        </td>
+                        <td>'.$row->dpi.'</td>
                         <td>'.$row->cname.'</td>
                         <td class="align-top">';
                         switch ($row->cstatus) {
@@ -725,20 +735,7 @@ $('#table_id').DataTable();
                         echo '</td>
                         <td>'.$row->cemail.'</td>
                         <td>'.$row->cphone.'</td>
-                        <td>
-                          <form >
-                            <button class="btn" type="submit" name="delete-costumer-submit" title="Delete">
-                              <svg class="svg-icon" viewBox="0 0 20 20" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                <path d="M17.114,3.923h-4.589V2.427c0-0.252-0.207-0.459-0.46-0.459H7.935c-0.252,0-0.459,0.207-0.459,0.459v1.496h-4.59c-0.252,0-0.459,0.205-0.459,0.459c0,0.252,0.207,0.459,0.459,0.459h1.51v12.732c0,0.252,0.207,0.459,0.459,0.459h10.29c0.254,0,0.459-0.207,0.459-0.459V4.841h1.511c0.252,0,0.459-0.207,0.459-0.459C17.573,4.127,17.366,3.923,17.114,3.923M8.394,2.886h3.214v0.918H8.394V2.886z M14.686,17.114H5.314V4.841h9.372V17.114z M12.525,7.306v7.344c0,0.252-0.207,0.459-0.46,0.459s-0.458-0.207-0.458-0.459V7.306c0-0.254,0.205-0.459,0.458-0.459S12.525,7.051,12.525,7.306M8.394,7.306v7.344c0,0.252-0.207,0.459-0.459,0.459s-0.459-0.207-0.459-0.459V7.306c0-0.254,0.207-0.459,0.459-0.459S8.394,7.051,8.394,7.306"></path>
-                              </svg>
-                            </button>
-                            <button class="btn" type="submit" name="delete-costumer-submit" title="Edit">
-                              <svg class="svg-icon" viewBox="0 0 20 20" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                <path d="M17.064,4.656l-2.05-2.035C14.936,2.544,14.831,2.5,14.721,2.5H3.854c-0.229,0-0.417,0.188-0.417,0.417v14.167c0,0.229,0.188,0.417,0.417,0.417h12.917c0.229,0,0.416-0.188,0.416-0.417V4.952C17.188,4.84,17.144,4.733,17.064,4.656M6.354,3.333h7.917V10H6.354V3.333z M16.354,16.667H4.271V3.333h1.25v7.083c0,0.229,0.188,0.417,0.417,0.417h8.75c0.229,0,0.416-0.188,0.416-0.417V3.886l1.25,1.239V16.667z M13.402,4.688v3.958c0,0.229-0.186,0.417-0.417,0.417c-0.229,0-0.417-0.188-0.417-0.417V4.688c0-0.229,0.188-0.417,0.417-0.417C13.217,4.271,13.402,4.458,13.402,4.688"></path>
-                              </svg>
-                            </button>
-                          </form>
-                        </td>
+
 
                       </tr>
 
@@ -836,7 +833,8 @@ function filterTable(event) {
         var firstCol = rows[i].cells[1].textContent.toUpperCase();
         var secondCol = rows[i].cells[2].textContent.toUpperCase();
         var thirdCol = rows[i].cells[3].textContent.toUpperCase();
-        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1) {
+        var fourthCol = rows[i].cells[5].textContent.toUpperCase();
+        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1 || fourthCol.indexOf(filter) > -1) {
             rows[i].style.display = "";
         } else {
             rows[i].style.display = "none";
@@ -844,7 +842,7 @@ function filterTable(event) {
     }
 }
 
-document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
+document.querySelector('#myInputTicket').addEventListener('keyup', filterTable, false);
 </script>
 
 
@@ -960,3 +958,4 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
         });
 
       	</script>
+DPI
