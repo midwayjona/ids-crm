@@ -42,10 +42,41 @@ if (isset($_POST['cpanel-signup-submit'])) {
   $sql = 'INSERT INTO cstatus (nit) VALUES (:nit)';
   $stmt = $conn->prepare($sql);
   $stmt->execute(['nit' => $nit]);
-  
-  
-  header("Location: ../assets/cpanel.php?status=SIGNUP_SUCCESS");
-  exit();
+
+
+  $body = '{
+    "username": "'.$nit.'",
+    "email": "'.$cemail.'",
+    "fullname": "'.$cname.'",
+    "password": "'.$cpwd.'"
+  }';
+
+  $token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjMyLCJ1c2VybmFtZSI6InNlcnZpY2Vjcm0iLCJlbWFpbCI6IiIsImZ1bGxuYW1lIjoiQ3VlbnRhIGRlIHNlcnZpY2lvIHBhcmEgQ1JNIiwiYXBwbGljYXRpb25zIjpbeyJuYW1lIjoic2VjdXJpdHkiLCJub2RlaWQiOjIsInJpZ2h0cyI6eyJncm91cHMiOltdLCJyb2xlcyI6WyJub2RlYWRtaW4iXSwicGVybWlzc2lvbnMiOlsibm9kZToxNDphbGwiXX19XSwiaWF0IjoxNjA1MTMwMTM0LCJleHAiOjE2MDc3MjIxMzQsImF1ZCI6Imh0dHA6Ly9pbmdlbmllcmlhZGVzb2Z0d2FyZTIwMjAuY29tIiwiaXNzIjoiU3VwZXIgRVJQIDMwMDAiLCJzdWIiOiJ1c2VyQGVycDMwMDAuY29tIn0.SNjI_ZOuNwDYl3XuPoWG4A12kqU0DqV9txT8T8Y4vR9Y7YO7jvlbMjV3g7PqeekqkVHWDlZn-yVVPzAgRIy0xg';
+  $url = 'https://auth.zer0th.com/api/node/user/create';
+  $curl = curl_init($url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    'Authorization: '.$token,
+    'Content-Type: application/json'
+    ]);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
+
+  $response = curl_exec($curl);
+  curl_close($curl);
+  $data = json_decode($response);
+
+  print_r($response);
+
+  print_r($data);
+
+  if ($data->success == true) {
+    # code..
+    header("Location: ../assets/cpanel.php?status=SIGNUP_SUCCESS");
+    exit();
+  } else {
+    header("Location: ../assets/cpanel.php?status=ERROR");
+    exit();
+  }
 
 } else {
   // code...
