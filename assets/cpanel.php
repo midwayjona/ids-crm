@@ -140,46 +140,12 @@ $('#table_id').DataTable();
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
+          <span>Customer Relationship Management</span>
           <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
-              <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line>
-              <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
+
           </a>
         </h6>
-        <!-- <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Year-end sale
-            </a>
-          </li>
-        </ul> -->
+
       </div>
     </nav>
 
@@ -201,28 +167,18 @@ $('#table_id').DataTable();
 
 
       <div class="d-flex justify-content-between dash-chart-main flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <a class="navbar-brand" href="<?php echo $path ?>assets/cpanel.php">
+        <a class="navbar-brand" href="<?php echo $path ?>assets/cpanel.php" style="color:#006994;">
             <img src="<?php echo $path ?>assets/media/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
             <?php echo $_SESSION['cname'] ?>
           </a>
 
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="mx-2 mr-4">
+              <?php echo date("F jS ");?><b> <?php echo date("h:ia");?></b>
+            </div>
 
-
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-dark mx-1">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-dark mx-1">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            This week
-          </button>
         </div>
+
 
       </div>
 
@@ -312,11 +268,61 @@ $('#table_id').DataTable();
 
           <!-- HOME TAB -->
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+
+            <!-- Home BODY -->
+            <div class="mb-5"></div> <!-- spacer -->
+            <h3>Control Center</h3>
+            <div class="mb-5"></div> <!-- spacer -->
+
+
+            <?php
+              $sql = 'SELECT * FROM ticket WHERE tstatus = 0';
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $open_tickets = $stmt->rowCount();
+
+              $sql = 'SELECT * FROM ticket WHERE tstatus = 1';
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $res_tickets = $stmt->rowCount();
+
+              $sql = 'SELECT * FROM ticket WHERE tstatus = 2';
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $closed_tickets = $stmt->rowCount();
+
+
+              $sql = 'SELECT * FROM costumer';
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $costumer_sum = $stmt->rowCount();
+            ?>
+
+            <div class="col-lg-6">
+
+            <h1 class="h3">Welcome back agent, current stats</h1>
+            <div class="mb-5"></div> <!-- spacer -->
+
+
+
+            </div>
+
+
+            <!-- Home BODY -->
+
             <div class="row">
               <div class="col-lg-6">
 
+              
                 <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="2330" height="983" style="display: block; height: 787px; width: 1864px;"></canvas>
 
+                <div class="col-lg-6">
+                <h1 class="h5">Open Tickets <b><?php print($open_tickets) ?></b></h1>
+                <h1 class="h5">Resolved Tickets <b><?php print($res_tickets) ?></b></h1>
+                <h1 class="h5">Closed Tickets <b><?php print($closed_tickets) ?></b></h1>
+                <div class="mb-5"></div> <!-- spacer -->
+                </div>
               		<!-- <canvas id="myChart" style="display: block; width: 452px; height: 226px;" width="452" height="226" class="chartjs-render-monitor"></canvas> -->
 
 
@@ -324,10 +330,13 @@ $('#table_id').DataTable();
 
               <div class="col-lg-6">
                 <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart2" width="2330" height="983" style="display: block; height: 787px; width: 1864px;"></canvas>
-
+                <div class="col-lg-6">
+                <h1 class="h5">Current Costumers : <b><?php print($costumer_sum) ?></b></h1>
+                <h1 class="h5">Total Tickets <b><?php print($open_tickets + $res_tickets + $closed_tickets) ?></b></h1>
+                <div class="mb-5"></div> <!-- spacer -->
+                </div>
               </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
-
 
 
           </div>
@@ -867,7 +876,7 @@ function filterTable(event) {
 document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 </script>
   <script>
-
+Chart.defaults.global.legend.display = false;
 
         var ctxi = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctxi, {
@@ -876,18 +885,21 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
             data: {
               datasets: [{
                 data: [
-                  randomScalingFactor(),
-                  randomScalingFactor(),
+                  <?php print($open_tickets) ?>,
+                  <?php print($res_tickets) ?>,
+                  <?php print($closed_tickets) ?>,
                 ],
                 backgroundColor: [
-                  window.chartColors.orange,
-                  window.chartColors.yellow,
+                  window.chartColors.blue,
+                  window.chartColors.green,
+                  window.chartColors.red,
                 ],
                 label: 'Dataset 1'
               }],
               labels: [
-                'Costumers',
-                'Cards'
+                'Open',
+                'Resolved',
+                'Closed'
               ]
             },
             options: {
@@ -897,7 +909,7 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
               },
               title: {
                 display: true,
-                text: 'Bank Statistics'
+                text: 'Ticket Statistics'
               },
               animation: {
                 duration: 5000,
@@ -917,27 +929,18 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
             data: {
               datasets: [{
                 data: [
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-                  randomScalingFactor(),
+                  <?php print($costumer_sum) ?>,
+                  <?php print($open_tickets + $closed_tickets + $res_tickets) ?>,
                 ],
                 backgroundColor: [
-                  window.chartColors.red,
                   window.chartColors.orange,
-                  window.chartColors.yellow,
-                  window.chartColors.green,
-                  window.chartColors.blue,
+                  window.chartColors.purple,
                 ],
                 label: 'Dataset 1'
               }],
               labels: [
-                'Red',
-                'Orange',
-                'Yellow',
-                'Green',
-                'Blue'
+                'Costumers',
+                'Tickets'
               ]
             },
             options: {
@@ -947,7 +950,7 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
               },
               title: {
                 display: true,
-                text: 'Transactions'
+                text: 'Support KDA Ratio'
               },
               animation: {
                 duration: 5000,
